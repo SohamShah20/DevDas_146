@@ -1,8 +1,12 @@
 import React from 'react';
 import './Navbar.css';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
+    
+  const loggedIn = props.loggedIn;
+  const setLoggedIn = props.setLoggedIn;
+
   return (
     <div>
         <nav>
@@ -14,10 +18,13 @@ const Navbar = () => {
                     <NavLink to="/about">About</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/login">Log in</NavLink>
+                    {loggedIn ? <></> : <NavLink to="/login">Log in</NavLink>}
                 </li>
                 <li>
-                    <NavLink to="signup">Sign up</NavLink>
+                    {loggedIn ? <></> : <NavLink to="/signup">Sign up</NavLink>}
+                </li>
+                <li>
+                    {loggedIn ? <Link to="/logout">Log Out</Link> : <></>}
                 </li>
             </ul>
         </nav>
