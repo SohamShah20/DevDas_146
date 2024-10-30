@@ -1,8 +1,11 @@
 import React from 'react';
+import SignupForm from '../components/SignupForm';
 
-const Signup = () => {
+const Signup = (props) => {
   return (
-    <div>Signup</div>
+    <div>
+      <SignupForm setLoggedIn = {props.setLoggedIn} />
+    </div>
   )
 }
 
