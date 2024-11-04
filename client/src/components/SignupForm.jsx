@@ -8,9 +8,7 @@ const SignupForm = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const {iscust}=useSelector((state) => state.user);
-
   const [formData, setformData] = useState({});
-
   function changeHandler(event){
     setformData((prev)=>({...prev, [event.target.name]: event.target.value,}));
   }
@@ -52,14 +50,14 @@ const submitHandler= async(event)=>{
     <div className = "form">
         <form onSubmit = {submitHandler}>
 
-            <label>username</label>
+            <label><p>username</p></label>
             <input type = "text" name = "username"  placeholder='username' onChange = {changeHandler} />
 
-            <label>Email</label>
+            <label><p>Email</p></label>
             <input type = "email" name = "email"  placeholder='email' onChange = {changeHandler} />
-            <label>Address</label>
+            <label><p>Address</p></label>
             <input type = "text" name = "address"  placeholder='address' onChange = {changeHandler} />
-            <label>Password</label>
+            <label><p>Password</p></label>
             <input type = "password" name = "password"  placeholder='password' onChange = {changeHandler} />
 
             <button
