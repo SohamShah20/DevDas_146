@@ -1,0 +1,14 @@
+{
+  "name": "devdas_146",
+  "version": "1.0.0",
+  "proxy": "http://localhost:3001",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+   "dev":"nodemon Backend/index.js",
+   "start":"node Backend/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
