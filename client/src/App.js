@@ -9,21 +9,27 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Logout from './pages/Logout';
+import { useSelector } from 'react-redux';
+import Getrequests from './pages/Getrequests';
+import Createdealer from './components/createdealer';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
-
+ 
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   return (
     <div>
-      <Navbar loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} />
+      <Navbar/>
 
       <Routes>
-        <Route path = "/" element = {loggedIn ? <Dashboard /> : <Home />} />
+        <Route path = "/" element = {currentUser ? <Dashboard /> : <Home />} />
         <Route path = "/about" element = {<About />} />
-        <Route path = "/login" element = {<Login setLoggedIn = {setLoggedIn} />} />
-        <Route path = "/signup" element = {<Signup setLoggedIn = {setLoggedIn} />} />
-        <Route path = "/logout" element = {<Logout setLoggedIn = {setLoggedIn} />} />
+        <Route path = "/login" element = {<Login/>} />
+        <Route path = "/signup" element = {<Signup />} />
+        <Route path = "/logout" element = {<Logout />} />
+        <Route path = "/createdealer" element = {<Createdealer />} />
+  
+        <Route path = "/getrequests" element = {<Getrequests />} />
       </Routes>
     </div>
   );

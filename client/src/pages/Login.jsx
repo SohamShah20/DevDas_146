@@ -1,11 +1,11 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
 
-const Login = (props) => {
+const Login = () => {
 
   return (
     <div>
-      <LoginForm setLoggedIn = {props.setLoggedIn} />
+      <LoginForm  />
     </div>
   )
 }
