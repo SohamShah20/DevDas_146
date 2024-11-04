@@ -28,7 +28,7 @@ const SignupForm = (props) => {
   }
 
   return (
-    <div>
+    <div className = "form">
         <form onSubmit = {submitHandler}>
             <label><p>First Name</p></label>
             <input type = "text" name = "firstName" required value = {signupData.firstName} onChange = {changeHandler} />

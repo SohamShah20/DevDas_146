@@ -5,6 +5,7 @@ const Login = (props) => {
 
   return (
     <div>
+      <h1>Log in</h1>
       <LoginForm setLoggedIn = {props.setLoggedIn} />
     </div>
   )
