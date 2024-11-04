@@ -1,0 +1,8 @@
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 10px;
+    background-color: rgba(9, 0, 49, 0.5);
+}

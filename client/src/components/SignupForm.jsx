@@ -49,8 +49,9 @@ const submitHandler= async(event)=>{
   }
 
   return (
-    <div>
+    <div className = "form">
         <form onSubmit = {submitHandler}>
+
             <label>username</label>
             <input type = "text" name = "username"  placeholder='username' onChange = {changeHandler} />
 
@@ -67,6 +68,7 @@ const submitHandler= async(event)=>{
         >
           {loading ? 'Loading...' : 'Sign Up'}
         </button>
+
         </form>
         <div className='have'>
         <p>Have an account?</p>

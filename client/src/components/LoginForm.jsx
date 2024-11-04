@@ -63,7 +63,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <div className = "form">
       <form onSubmit = {submitHandler}>
         <label><p>Email</p></label>
         <input type = "email" name = "email" required value={formData.email} onChange={changeHandler} />

@@ -1,0 +1,11 @@
+.box{
+    width: 400px;
+    height: fit-content;
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;;
+    border-radius: 5px;
+    align-items: center;
+}
