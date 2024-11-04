@@ -30,15 +30,15 @@ const SignupForm = (props) => {
   return (
     <div>
         <form onSubmit = {submitHandler}>
-            <label>First Name</label>
+            <label><p>First Name</p></label>
             <input type = "text" name = "firstName" required value = {signupData.firstName} onChange = {changeHandler} />
-            <label>Last Name</label>
+            <label><p>Last Name</p></label>
             <input type = "text" name = "lastName" required value = {signupData.lastName} onChange = {changeHandler} />
-            <label>Email</label>
+            <label><p>Email</p></label>
             <input type = "email" name = "email" required value = {signupData.email} onChange = {changeHandler} />
-            <label>Password</label>
+            <label><p>Password</p></label>
             <input type = "password" name = "password" required value = {signupData.password} onChange = {changeHandler} />
-            <label>Confirm Password</label>
+            <label><p>Confirm Password</p></label>
             <input type = "password" name = "confirmPass" required value = {signupData.confirmPass} onChange = {changeHandler} />
             <button>Submit</button>
         </form>
