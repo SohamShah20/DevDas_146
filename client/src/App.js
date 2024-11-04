@@ -15,10 +15,10 @@ import { useSelector } from 'react-redux';
 import Getrequests from './pages/Getrequests';
 import Createdealer from './components/createdealer';
 
-function App() {
+
 
  
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+ 
 
 import RequestHistory from './pages/RequestHistory';
 import Request from './pages/Request.jsx';
@@ -26,7 +26,7 @@ import NotFound from './pages/NotFound.jsx';
 
 function App() {
 
-
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
 
   return (
