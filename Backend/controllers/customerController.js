@@ -2,10 +2,10 @@
 import Request from '../models/request.model.js'
 
 export async function request(req,res,next){
-    const {address,custname,date,time,email}=req.body;
+    const {city,custname,date,time,email,scrapData}=req.body;
    const times=time.toString();
     const dates=date.toString();
-    const newcust = new Request({address,custname,date:dates,time:times,email});
+    const newcust = new Request({city,custname,date:dates,time:times,email,scrapData});
     try {
         await newcust.save();
         res.status(201).json('request made successfully!');

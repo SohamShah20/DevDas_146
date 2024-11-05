@@ -18,7 +18,10 @@ const Logout = () => {
     dispatch(signOutUserStart());
     dispatch(setiscust(true));
     try{
-      const data = await fetch('http://localhost:3001/api/auth/signout');
+      const data = await fetch('http://localhost:3001/api/auth/signout', {
+        method: 'POST', 
+        credentials: 'include', 
+      });
       const res=await data.json();
     if(res.success===false){
       dispatch(signOutUserFailure(res.message));

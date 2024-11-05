@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import Scrapdetail from '../components/Scrapdetail';
 const GetRequests = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [requests, setRequests] = useState([]);
@@ -30,11 +30,14 @@ const GetRequests = () => {
             ) : (
                 requests.map((request, index) => (
                     <div key={index}>
-                        <p>{request.custname}</p>
-                        <p>{request.email}</p>
-                        <p>{request.date}</p>
-                        <p>{request.time}</p>
-                        <hr />
+                        <p>Customer Name: {request.custname}</p>
+                        <p>Customer email: {request.email}</p>
+                        <p>Date of Scrap pickup: {request.date}</p>
+                        <p>Time of Scrap pickup: {request.time}</p>
+                        
+                        
+                        Scrap Details:<Scrapdetail scrapDetail={request.scrapData} />
+                        <hr/>
                     </div>
                 ))
             )}

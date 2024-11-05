@@ -14,7 +14,7 @@ if(iscust) dispatch(setiscust(false));
     <div>
        
         <h1>Welcome, {currentUser.username}!</h1>
-        <p>Create a scrap pickup</p>
+        <p>Create a scrap Dealer</p>
         <Link to="/createdealer">create</Link>
         
     </div>

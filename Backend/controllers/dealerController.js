@@ -6,7 +6,7 @@ const id=req.params.id;
 const dealer= await Dealer.findById(id);
 
 try
-{const requests=await Request.find({address:dealer.address});
+{const requests=await Request.find({city:dealer.city});
 return res.status(200).json(requests);}
 catch(error){
     return res.status(404).json(error);

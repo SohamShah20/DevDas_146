@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Logout from './pages/Logout';
+
+
 import { useSelector } from 'react-redux';
 import Getrequests from './pages/Getrequests';
 import Createdealer from './components/createdealer';
@@ -21,13 +23,13 @@ function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
-
+  
   return (
     <div>
       <Navbar/>
 
       <Routes>
-        <Route path = "/" element = {currentUser ? <Dashboard /> : <Home />} />
+        <Route path = "/" element = {currentUser? <Dashboard /> : <Home />} />
         <Route path = "/about" element = {<About />} />
         <Route path = "/login" element = {<Login/>} />
         <Route path = "/signup" element = {<Signup />} />
