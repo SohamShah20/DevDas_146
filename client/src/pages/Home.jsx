@@ -1,11 +1,10 @@
 import React from 'react';
-import './Home.css';
 
 const Home = () => {
   return (
     <div>
-      <div  class = "title">
-        <h1>SCRAP COLLECTOR</h1>
+      <div>
+        <h1 className = "text-center">SCRAP COLLECTOR</h1>
       </div>
     </div>
   )
