@@ -18,7 +18,7 @@ const SignupForm = () => {
 const submitHandler= async(event)=>{
     event.preventDefault();
     formData.isadmin=false;
-    formData.iscust=iscust;
+    
     try {
       setLoading(true);
       const res = await fetch('http://localhost:3001/api/auth/signup', {
@@ -61,7 +61,8 @@ const submitHandler= async(event)=>{
             <input type = "text" name = "address"  placeholder='address' onChange = {changeHandler} />
             <label>Password</label>
             <input type = "password" name = "password"  placeholder='password' onChange = {changeHandler} />
-
+            <label>city</label>
+            <input type = "text" name = "city"  placeholder='city' onChange = {changeHandler} />
             <button
           disabled={loading}
           className='signup-button'

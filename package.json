@@ -5,10 +5,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "dev":"nodemon Backend/index.js",
-   "start":"node Backend/index.js"
+    "dev": "nodemon Backend/index.js",
+    "start": "node Backend/index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
 }
