@@ -8,7 +8,7 @@ const   Viewacceptedrequests = (props) => {
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
     const setdealer=props.setdealer;
-    const id="njsnjndnwkmdkwf";
+ 
     useEffect(() => {
         const fetchRequests = async () => {
             try {
@@ -26,8 +26,24 @@ const   Viewacceptedrequests = (props) => {
         }
     }, [currentUser]);
 
-    const clickhandler=(event,index)=>{
-        setdealer(requests[index].dealer_id);
+    const clickhandler=async(event,index)=>{
+        const req=requests[index];
+        const res = await fetch(`http://localhost:3001/api/customer/payreceived/${req._id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+             
+            },
+            credentials: 'include', 
+          });
+          const data= await res.json();
+
+          if(data.success!==true){
+            seterror(data.message);
+            return;
+          }
+          setmessage(data.message);
+            return;
       }  
 
        
@@ -47,7 +63,8 @@ const   Viewacceptedrequests = (props) => {
                        
                          
                         Scrap Details:<Scrapdetail scrapDetail={request.scrapData} /><br />
-                        <Link  to={`/viewdealer/${id}`}>View dealer details</Link>
+                        <Link  to={`/viewdealer/${id}`}>View dealer details</Link><br />
+                        <button onClick={(event)=>clickhandler(event,index)}>Received</button>
                         <hr/>
                         
                     </div>)

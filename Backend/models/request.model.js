@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const scrapSchema = new mongoose.Schema({
   
   type: String,
-  quantity: String,
+  quantity: Number,
 });
 const RequestSchema = new mongoose.Schema(
   {
@@ -15,6 +15,10 @@ const RequestSchema = new mongoose.Schema(
       type: String,
       required: true,
      
+    },
+    cangenreceipt: {
+      type: Boolean,
+      default:false,
     },
     city: {
       type: String,

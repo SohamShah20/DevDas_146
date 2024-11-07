@@ -6,6 +6,7 @@ const Acceptedreq = () => {
     const [requests, setRequests] = useState([]);
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
+    const [bill,setbill]=useState({});
     useEffect(() => {
         const fetchRequests = async () => {
             try {
@@ -23,7 +24,33 @@ const Acceptedreq = () => {
         }
     }, [currentUser]);
 
-    
+   async function clickhandler(event,index){
+   const req=requests[index];
+  const id=req._id;
+
+  try{
+     const res=fetch(`http://localhost:3001/api/dealer/genreceipt/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+         
+        },
+        credentials: 'include', 
+      });
+
+      const data= await res.json();
+      if(data.success!==true){
+        seterror(data.message);
+        return;
+      }
+      setmessage(data.message);
+      return;
+  }
+  catch(error){
+    seterror(error.message);
+    return;
+  }
+   }
     return (
         <div>
             <h1>Requests</h1>
@@ -39,7 +66,7 @@ const Acceptedreq = () => {
                         
                          
                         Scrap Details:<Scrapdetail scrapDetail={request.scrapData} />
-                      
+                      {request.cangenreceipt?<button onClick={(event)=>clickhandler(event,index)}>Generate Receipt</button>:<></>}
                         <hr/>
                         
                     </div>
