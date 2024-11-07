@@ -15,10 +15,11 @@ const Cust = () => {
         
        
         
-        <Link to="/history"><p>View Your Requests</p></Link>
+        <Link to="/history"><p>View request History</p></Link>
 
 <Link to="/request"><p>Put Up a New Request</p></Link>
-     
+<Link to="/viewrequests"><p>View Your Requests</p></Link>
+<Link to="/viewacceptedrequests"><p>View Your Accepted Requests</p></Link>
     </div>
   )
 }

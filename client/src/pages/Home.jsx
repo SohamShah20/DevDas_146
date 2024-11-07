@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <h1 className = "text-center">SCRAP COLLECTOR</h1>
+        <h1 className = "text-center text-white font-bold text-3xl">SCRAP COLLECTOR</h1>
       </div>
     </div>
   )
