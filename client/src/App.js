@@ -29,8 +29,8 @@ function App() {
   const [dealer, setdealer] = useState(null);
   return (
     <div>
-      <Navbar/>
 
+      <Navbar />
       <Routes>
         <Route path = "/" element = {currentUser? <Dashboard /> : <Home />} />
         <Route path = "/about" element = {<About />} />
