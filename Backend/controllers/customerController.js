@@ -51,6 +51,7 @@ export async function getrequests(req,res,next){
             return res.status(404).json(error);
         }
         }
+<<<<<<< Updated upstream
 
         export async function feedback(req, res, next){
           const {customer, dealer, rating, description} = req.body;
@@ -65,3 +66,16 @@ export async function getrequests(req,res,next){
             next(error);
           }
         };
+=======
+        export async function payreceived(req,res,next){
+          const id=req.params.id;
+         
+          
+          try
+          { const dealer= await Request.findByIdAndUpdate(id,{cangenreceipt:true});
+          return res.status(200).json(dealer);}
+          catch(error){
+              return res.status(404).json(error);
+          }
+          }
+>>>>>>> Stashed changes
