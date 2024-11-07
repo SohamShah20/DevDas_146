@@ -1,9 +1,8 @@
 import { Router } from "express";
-<<<<<<< Updated upstream
-import {request, feedback,getacceptedrequests,getrequests,getdealer} from '../controllers/customerController.js';
-=======
-import {request,getacceptedrequests,getrequests,getdealer,payreceived} from '../controllers/customerController.js';
->>>>>>> Stashed changes
+
+
+import {request,getacceptedrequests,getrequests,getdealer,payreceived, feedback} from '../controllers/customerController.js';
+
 import express from "express";
 import { verifyToken } from "../controllers/Verifyuser.js";
 const router = express.Router();

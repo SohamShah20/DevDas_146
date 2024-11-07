@@ -12,10 +12,10 @@ const Scrapdealer = () => {
     <div>
         
         <h1>Welcome, {currentUser.username}!</h1>
-        <Link to={'/getrequests'} className='text-white'>SEE REQUESTS
+        <Link to={'/getrequests'} className=''>SEE REQUESTS
         </Link>
         <br />
-        <Link to={'/getacceptedrequests'} className='text-white'>SEE ACCEPTED REQUESTS
+        <Link to={'/getacceptedrequests'} className=''>SEE ACCEPTED REQUESTS
         </Link>
       
     </div>
