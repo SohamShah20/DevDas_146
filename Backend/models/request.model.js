@@ -16,10 +16,14 @@ const RequestSchema = new mongoose.Schema(
       required: true,
      
     },
-  
     city: {
       type: String,
       required: true,
+     
+    },
+    dealer_id: {
+      type: String,
+      default: ""
     },
       date: {
         type: String,
@@ -32,6 +36,10 @@ const RequestSchema = new mongoose.Schema(
      scrapData: {
         type: [scrapSchema],
         required: true,
+      },
+      status:{
+        type: String,
+        default: "PENDING"
       },
   },
   { timestamps: true }

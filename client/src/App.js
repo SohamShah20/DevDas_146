@@ -18,12 +18,15 @@ import Createdealer from './components/createdealer';
 import RequestHistory from './pages/RequestHistory';
 import Request from './pages/Request.jsx';
 import NotFound from './pages/NotFound.jsx';
-
+import Viewrequests from './pages/Viewrequests.jsx';
+import Viewacceptedrequests from './pages/Viewacceptedrequests.jsx';
+import Acceptedreq from './pages/Acceptedreq.jsx';
+import Viewdealer from './pages/Viewdealer.jsx';
 function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
-  
+  const [dealer, setdealer] = useState(null);
   return (
     <div>
       <Navbar/>
@@ -36,8 +39,12 @@ function App() {
         <Route path = "/logout" element = {<Logout />} />
         <Route path = "/createdealer" element = {<Createdealer />} />
         <Route path = "/getrequests" element = {<Getrequests />} />
+        <Route path = "/getacceptedrequests" element = {<Acceptedreq />} />
         <Route path = "/history" element = {<RequestHistory scraps = {scraps} />} />
         <Route path = "/request" element = {<Request />} />
+        <Route path = "/viewrequests" element = {<Viewrequests />} />
+        <Route path = "/viewacceptedrequests" element = {<Viewacceptedrequests/>} />
+        <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>
