@@ -22,6 +22,7 @@ import Viewrequests from './pages/Viewrequests.jsx';
 import Viewacceptedrequests from './pages/Viewacceptedrequests.jsx';
 import Acceptedreq from './pages/Acceptedreq.jsx';
 import Viewdealer from './pages/Viewdealer.jsx';
+import SetPrice from './components/SetPrice.jsx';
 function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -45,6 +46,7 @@ function App() {
         <Route path = "/viewrequests" element = {<Viewrequests />} />
         <Route path = "/viewacceptedrequests" element = {<Viewacceptedrequests/>} />
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
+        <Route path = "/setprice" element = {<SetPrice />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>

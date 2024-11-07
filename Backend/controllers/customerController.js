@@ -1,4 +1,4 @@
-
+import Feedback from '../models/feedback.model.js';
 import Request from '../models/request.model.js'
 import Customer from '../models/customer.model.js'
 import Dealer from '../models/dealer.model.js'
@@ -51,3 +51,17 @@ export async function getrequests(req,res,next){
             return res.status(404).json(error);
         }
         }
+
+        export async function feedback(req, res, next){
+          const {customer, dealer, rating, description} = req.body;
+          const request_id = req.params.id;
+          const valid_id = await Feedback.findOne({ request_id });
+          if(valid_id) return res.status(404).send('feedback already provided!');
+          const newFeedback = new Feedback({request_id, customer, dealer, rating, description});
+          try{
+            await newFeedback.save();
+            res.status(201).json('feedback submitted successfully!');
+          } catch(error){
+            next(error);
+          }
+        };
