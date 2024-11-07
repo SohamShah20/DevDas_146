@@ -6,13 +6,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 export async function createdealer(req,res,next){
     
-    const {username, email, password,address} =req.body;
+    const {username, email, password,address,city} =req.body;
     const hashedPassword = bcryptjs.hashSync(password, 10);
     const validUser = await Dealer.findOne({ email });
     if (validUser) return res.status(404).send('Dealer exists!');
     const validUser1 = await Dealer.findOne({ username });
     if (validUser1) return res.status(404).send('Dealer exists!');
-    const newcust = new Dealer({ username, email, password: hashedPassword,address });
+    const newcust = new Dealer({ username, email, password: hashedPassword,address,city });
   try {
     await newcust.save();
     res.status(201).json('Dealer created successfully!');

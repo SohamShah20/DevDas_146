@@ -43,7 +43,9 @@ const LoginForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+         
         },
+        credentials: 'include', 
         body: JSON.stringify(formData),
       });
       const data = await res.json();
@@ -63,12 +65,30 @@ const LoginForm = () => {
   }
 
   return (
-    <div className = "form">
-      <form onSubmit = {submitHandler}>
-        <label><p>Email</p></label>
-        <input type = "email" name = "email" required value={formData.email} onChange={changeHandler} />
-        <label><p>Password</p></label>
-        <input type = "password" name = "password" required value = {formData.password} onChange = {changeHandler} />
+    <div className = "w-full max-w-md mx-auto p-6 bg-white rounded-md shadow-md ">
+      <form onSubmit = {submitHandler} className="w-full max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Sign in to your account</h2>
+      <div className="mb-4">
+      <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+          Email address
+        </label>
+        <input type = "email"  
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+         id="email" 
+         name = "email"
+          required value={formData.email} 
+          onChange={changeHandler} />
+        <div className="mb-6">
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+          Password
+        </label>
+        <input type = "password"
+         name = "password" 
+         required value = {formData.password}
+           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          onChange = {changeHandler} />
+        </div>
+        <div className="flex items-center mb-6 justify-between">
         <button
           disabled={loading}
           className='signin-button'
@@ -78,7 +98,7 @@ const LoginForm = () => {
         >
           {loading ? 'Loading...' : 'Sign In as customer'}
         </button>
-
+   <br/>
         <button
           disabled={loading}
           className='signin-button'
@@ -88,7 +108,10 @@ const LoginForm = () => {
         >
           {loading ? 'Loading...' : 'Sign In as dealer'}
         </button>
+        </div>
+        </div>
       </form>
+      <br />
       <div className='have-account'>
         <p>Dont have an account?</p>
         <Link to={'/signup'}>

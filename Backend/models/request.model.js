@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
-
+const scrapSchema = new mongoose.Schema({
+  
+  type: String,
+  quantity: String,
+});
 const RequestSchema = new mongoose.Schema(
   {
     custname: {
@@ -12,11 +16,15 @@ const RequestSchema = new mongoose.Schema(
       required: true,
      
     },
-  
-    address: {
-        type: String,
-        required: true,
-      },
+    city: {
+      type: String,
+      required: true,
+     
+    },
+    dealer_id: {
+      type: String,
+      default: ""
+    },
       date: {
         type: String,
         required: true,
@@ -24,6 +32,14 @@ const RequestSchema = new mongoose.Schema(
       time: {
         type: String,
         required: true,
+      },
+     scrapData: {
+        type: [scrapSchema],
+        required: true,
+      },
+      status:{
+        type: String,
+        default: "PENDING"
       },
   },
   { timestamps: true }

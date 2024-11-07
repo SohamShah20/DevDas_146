@@ -16,7 +16,7 @@ const SignupForm = () => {
 const submitHandler= async(event)=>{
     event.preventDefault();
     formData.isadmin=false;
-    formData.iscust=iscust;
+    
     try {
       setLoading(true);
       const res = await fetch('http://localhost:3001/api/auth/signup', {
@@ -47,19 +47,24 @@ const submitHandler= async(event)=>{
   }
 
   return (
-    <div className = "form">
+    <div className = "form text-white flex flex-col" >
         <form onSubmit = {submitHandler}>
-
+            Signup 
+            <br />
             <label><p>username</p></label>
             <input type = "text" name = "username"  placeholder='username' onChange = {changeHandler} />
 
-            <label><p>Email</p></label>
-            <input type = "email" name = "email"  placeholder='email' onChange = {changeHandler} />
-            <label><p>Address</p></label>
-            <input type = "text" name = "address"  placeholder='address' onChange = {changeHandler} />
-            <label><p>Password</p></label>
-            <input type = "password" name = "password"  placeholder='password' onChange = {changeHandler} />
-
+            <label htmlFor='email'>Email</label>
+            <input type = "email" name = "email" id = "email" placeholder='email' onChange = {changeHandler} />
+            <label htmlFor='address'>Address</label>
+            <input type = "text" name = "address" id = "address" placeholder='address' onChange = {changeHandler} />
+            <label htmlFor='password'>Password</label>
+            <input type = "password" name = "password" id = "password" placeholder='password' onChange = {changeHandler} />
+            <br />
+            <br />
+            <label htmlFor='city'>city </label>
+            <input type = "text" name = "city" id = "city"  placeholder='city' onChange = {changeHandler} />
+            <br />
             <button
           disabled={loading}
           className='signup-button'

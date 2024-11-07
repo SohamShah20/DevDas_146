@@ -7,9 +7,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 export const signup = async (req, res, next) => {
 
-  const { username, email, password,address,isadmin,iscust } = req.body;
+  const { username, email, password,address,isadmin,city } = req.body;
 
-  if(iscust){
+
     const hashedPassword = bcryptjs.hashSync(password, 10);
   
  
@@ -17,31 +17,18 @@ export const signup = async (req, res, next) => {
     if (validUser) return res.status(404).send('User exists!');
     const validUser1 = await Customer.findOne({ username });
     if (validUser1) return res.status(404).send('User exists!');
-    const newcust = new Customer({ username, email, password: hashedPassword,address,isadmin });
+    const newcust = new Customer({ username, email, password: hashedPassword,address,isadmin,city });
   try {
     await newcust.save();
     res.status(201).json('User created successfully!');
   } catch (error) {
     next(error);
   }
-  }
-  else{
-  const hashedPassword = bcryptjs.hashSync(password, 10);
+ 
+
   
  
-    const validUser = await Dealer.findOne({ email });
-    if (validUser) return res.status(404).send('Dealer exists!');
-    const validUser1 = await Dealer.findOne({ username });
-    if (validUser1) return res.status(404).send('Dealer exists!');
-    const newcust = new Dealer({ username, email, password: hashedPassword,address,isadmin });
-  try {
-    await newcust.save();
-    res.status(201).json('Dealer created successfully!');
-  } catch (error) {
-    next(error);
-  }
-  
-  }
+
   
 };
 

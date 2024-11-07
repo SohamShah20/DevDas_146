@@ -21,9 +21,7 @@ const Dashboard = () => {
        
 
         
-        <Link to="/history"><p>View Your Requests</p></Link>
-
-        <Link to="/request"><p>Put Up a New Request</p></Link>
+      
         
 
     </div>

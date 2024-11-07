@@ -5,7 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   iscust:true,
-
+  token:null
 };
 
 const userSlice = createSlice({
@@ -62,6 +62,9 @@ const userSlice = createSlice({
     },
     setiscust: (state, action) => {
       state.iscust=action.payload;
+    },
+    settoken: (state, action) => {
+      state.token=action.payload;
     }
   },
 });
@@ -69,6 +72,7 @@ const userSlice = createSlice({
 export const {
   signInStart,
   setiscust,
+  settoken,
   signInSuccess,
   signInFailure,
   updateUserFailure,
