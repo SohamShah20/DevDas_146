@@ -1,4 +1,5 @@
 import Dealer from '../models/dealer.model.js'
+import Scrap from '../models/scrap.model.js';
 import bcryptjs from 'bcryptjs';
 
 import jwt from 'jsonwebtoken';
@@ -20,4 +21,21 @@ export async function createdealer(req,res,next){
     next(error);
   }
   
+}
+
+export async function setPrice(req, res, next){
+  const {type, price} = req.body;
+  const typeExists = await Scrap.findOne({ type });
+  if (typeExists){
+    const id = typeExists._id;
+    await Scrap.findByIdAndUpdate(id, {price: price});
+    return res.status(201).json('Scrap price updated');
+  }
+  const newScrap = new Scrap({ type, price });
+  try{
+    await newScrap.save();
+    res.status(201).json('New scrap created');
+  } catch(error){
+    next(error);
+  }
 }
