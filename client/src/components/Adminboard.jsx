@@ -16,7 +16,8 @@ if(iscust) dispatch(setiscust(false));
         <h1>Welcome, {currentUser.username}!</h1>
         <p>Create a scrap Dealer</p>
         <Link to="/createdealer">create</Link>
-        
+        <p>Set Scrap Prices</p>
+        <Link to="/setprice">Set Price</Link>
     </div>
   )
 }
