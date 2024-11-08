@@ -17,7 +17,9 @@ const Scrapdealer = () => {
         <br />
         <Link to={'/getacceptedrequests'} className=''>SEE ACCEPTED REQUESTS
         </Link>
-      
+       <br />
+        <Link to={'/gethistory'} className=''>SEE REQUEST HISTORY
+        </Link>
     </div>
   )
 }

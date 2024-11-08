@@ -25,14 +25,14 @@ const BillSchema = new mongoose.Schema(
         type: [scrapSchema],
         
       },
-      gtotal:{Number,},
+      gtotal:{type:Number,},
      
       
   
    
   
     req_id:{
-        String,
+        type:String,
     }
   },
   { timestamps: true }

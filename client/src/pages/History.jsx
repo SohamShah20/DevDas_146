@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Scrapdetail from '../components/Scrapdetail';
 import { Link } from 'react-router-dom';
-const   RequestHistory = (props) => {
+const   History = (props) => {
     const { currentUser } = useSelector((state) => state.user);
     const [requests, setRequests] = useState([]);
     const [error, seterror] = useState(null);
@@ -12,7 +12,7 @@ const   RequestHistory = (props) => {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/api/customer/getclosedrequests/${currentUser._id}`);
+                const res = await fetch(`http://localhost:3001/api/dealer/getclosedrequests/${currentUser._id}`);
                 const data = await res.json();
              
                 setRequests(data);
@@ -34,7 +34,7 @@ const   RequestHistory = (props) => {
                 <p>No requests found.</p>
             ) : (
                 requests.map((request, index) => {
-                    const id = request.dealer_id;
+                   
                     const req_id = request._id;
                     return(<div key={index}>
                         <p>Customer Name: {request.custname}</p>
@@ -44,7 +44,7 @@ const   RequestHistory = (props) => {
                        
                          
                         Scrap Details:<Scrapdetail scrapDetail={request.scrapData} /><br />
-                        <Link  to={`/viewdealer/${id}`}>View dealer details</Link><br />
+                        
                         <Link  to={`/viewbill/${req_id}`}>View Bill</Link><br />
                         <hr/>
                         
@@ -58,4 +58,4 @@ const   RequestHistory = (props) => {
     );
 };
 
-export default RequestHistory;
+export default History;

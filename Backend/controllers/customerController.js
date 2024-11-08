@@ -1,7 +1,8 @@
 import Feedback from '../models/feedback.model.js';
 import Request from '../models/request.model.js'
 import Customer from '../models/customer.model.js'
-import Dealer from '../models/dealer.model.js'
+import Dealer from '../models/dealer.model.js';
+import Bill from '../models/bill.model.js';
 export async function request(req,res,next){
     const {city,custname,date,time,email,scrapData}=req.body;
    const times=time.toString();
@@ -79,3 +80,26 @@ export async function getrequests(req,res,next){
           }
           }
 
+          export async function getclosedrequests(req,res,next){
+            const id=req.params.id;
+            const dealer= await Customer.findById(id);
+            
+            try
+            {const requests=await Request.find({city:dealer.city,status:"CLOSED",email:dealer.email});
+            return res.status(200).json(requests);}
+            catch(error){
+                return res.status(404).json(error);
+            }
+            }
+
+            export async function getbill(req,res,next){
+              const id=req.params.id;
+             
+              
+              try
+              { const dealer= await Bill.findOne({req_id:id});
+              return res.status(200).json(dealer);}
+              catch(error){
+                  return res.status(404).json(error);
+              }
+              }

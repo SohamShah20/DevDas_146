@@ -23,6 +23,8 @@ import Viewacceptedrequests from './pages/Viewacceptedrequests.jsx';
 import Acceptedreq from './pages/Acceptedreq.jsx';
 import Viewdealer from './pages/Viewdealer.jsx';
 import SetPrice from './components/SetPrice.jsx';
+import Viewbill from './pages/Viewbill.jsx';
+import History from './pages/History.jsx';
 function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -41,11 +43,13 @@ function App() {
         <Route path = "/createdealer" element = {<Createdealer />} />
         <Route path = "/getrequests" element = {<Getrequests />} />
         <Route path = "/getacceptedrequests" element = {<Acceptedreq />} />
-        <Route path = "/history" element = {<RequestHistory scraps = {scraps} />} />
+        <Route path = "/gethistory" element = {<History />} />
+        <Route path = "/history" element = {<RequestHistory />} />
         <Route path = "/request" element = {<Request />} />
         <Route path = "/viewrequests" element = {<Viewrequests />} />
         <Route path = "/viewacceptedrequests" element = {<Viewacceptedrequests/>} />
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
+        <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
         <Route path = "*" element = {<NotFound />} />
 
