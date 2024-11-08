@@ -112,12 +112,16 @@ const LoginForm = () => {
         </div>
       </form>
       <br />
-      <div className='have-account'>
-        <p>Dont have an account?</p>
-        <Link to={'/signup'}>
-          <span className=''>Sign up</span>
-        </Link>
-      </div>
+      <div className="flex justify-end mt-4">
+  <p className="text-gray-600 mr-5">Don’t have an account?</p>
+  <Link
+    to="/signup"
+    className="text-blue-500 font-bold hover:underline"
+  >
+    Sign up
+  </Link>
+</div>
+
       {error && <p className='error'>{error}</p>}
     
     </div>

@@ -1,87 +1,136 @@
-import React from 'react';
-import './Form.css';
-import { useState } from "react";
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+
 const SignupForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const {iscust}=useSelector((state) => state.user);
-  const [formData, setformData] = useState({});
-  function changeHandler(event){
-    setformData((prev)=>({...prev, [event.target.name]: event.target.value,}));
+  const { iscust } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({});
+
+  function changeHandler(event) {
+    setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   }
 
-const submitHandler= async(event)=>{
+  const submitHandler = async (event) => {
     event.preventDefault();
-    formData.isadmin=false;
-    
+    formData.isadmin = false;
+
     try {
       setLoading(true);
       const res = await fetch('http://localhost:3001/api/auth/signup', {
         method: 'POST',
-        
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
-      if (data.success === false) {
+
+      if (!data.success) {
         setLoading(false);
         setError(data.message);
         return;
       }
+
       setLoading(false);
       setError(null);
-      if(iscust){navigate('/login');}
-      else{
+      if (iscust) {
+        navigate('/login');
+      } else {
         navigate('/');
       }
     } catch (error) {
       setLoading(false);
       setError(error.message);
     }
-  }
+  };
 
   return (
-    <div className = "form text-white flex flex-col" >
-        <form onSubmit = {submitHandler}>
-            Signup 
-            <br />
-            <label><p>username</p></label>
-            <input type = "text" name = "username"  placeholder='username' onChange = {changeHandler} />
+    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+      <form onSubmit={submitHandler} className="w-full max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Create an Account</h2>
+        
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter your username"
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            onChange={changeHandler}
+          />
+        </div>
 
-            <label htmlFor='email'>Email</label>
-            <input type = "email" name = "email" id = "email" placeholder='email' onChange = {changeHandler} />
-            <label htmlFor='address'>Address</label>
-            <input type = "text" name = "address" id = "address" placeholder='address' onChange = {changeHandler} />
-            <label htmlFor='password'>Password</label>
-            <input type = "password" name = "password" id = "password" placeholder='password' onChange = {changeHandler} />
-            <br />
-            <br />
-            <label htmlFor='city'>city </label>
-            <input type = "text" name = "city" id = "city"  placeholder='city' onChange = {changeHandler} />
-            <br />
-            <button
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            onChange={changeHandler}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">Address</label>
+          <input
+            type="text"
+            name="address"
+            id="address"
+            placeholder="Enter your address"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            onChange={changeHandler}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            onChange={changeHandler}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="city" className="block text-gray-700 text-sm font-bold mb-2">City</label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Enter your city"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            onChange={changeHandler}
+          />
+        </div>
+
+        <button
+          type="submit"
           disabled={loading}
-          className='signup-button'
+          className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
         >
           {loading ? 'Loading...' : 'Sign Up'}
         </button>
+      </form>
 
-        </form>
-        <div className='have'>
-        <p>Have an account?</p>
-        <Link to={'/login'}>
-          <span className='signin'>Sign in</span>
-        </Link>
+      <div className="mt-4 text-center">
+        <p>Already have an account?</p>
+        <Link to="/login" className="text-blue-500 hover:underline">
+          Sign in
+        </Link> 
       </div>
-      {error && <p className='error'>{error}</p>}
+
+      {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
     </div>
-  )
-}
+  );
+};
 
 export default SignupForm;
