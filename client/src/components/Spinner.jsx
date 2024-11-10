@@ -11,7 +11,7 @@ const Spinner = () => {
     <span className='text-white text-3xl ml-4 mb-7'> W a L L a H</span>
 
     {/* Colorful spinner */}
-    <BarLoader color="#84cc16" height={7} width={350} />
+    <BarLoader color="#84cc16" height={6} width={350} />
   </div>
 );
 }
