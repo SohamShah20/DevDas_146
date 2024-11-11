@@ -1,25 +1,46 @@
 import React from 'react';
-import Homevid from '../assets/new.mp4';
+import Twriter from '../components/Twriter';
+import Footer from '../components/Footer.jsx';
+import  { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import Homepage from '../components/Homepage.jsx';
+import ClipLoader from 'react-spinners/ClipLoader';
+import Spinner from '../components/Spinner';
 
-const Home = () => {
+const Home = ({isLoading, setIsLoading}) => {
+  const location = useLocation();
+  const videoRef = useRef(null); 
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setIsLoading(true);
+    }
+
+    const handleLoadedData = () => setIsLoading(false);
+    const videoElement = videoRef.current;
+
+    if (videoElement) {
+      videoElement.addEventListener('loadeddata', handleLoadedData);
+    }
+
+    // Fallback timeout to hide spinner after 5 seconds
+    const timeoutId = setTimeout(() => setIsLoading(false), 5000);
+
+    return () => {
+      if (videoElement) {
+        videoElement.removeEventListener('loadeddata', handleLoadedData);
+      }
+      clearTimeout(timeoutId);
+    };
+  }, [location.pathname]);
   return (
-    <div>
-
-            <div className="fixed top-0 left-0 w-full h-full overflow-hidden z-[-1]">
-                <video className="w-full h-full object-cover" src={Homevid} autoPlay loop muted></video>
-
-            </div>
-      <div className="relative z-10 text-center text-white item-center mt-40">
-        <h1 className="text-4xl md:text-6xl font-bold ">
-          Scrap Dealer
-        </h1>
-        <p className="text-lg md:text-xl pt-2 mb-8">
-          Sell us your recyclable wastes and help contribute to the circular economy.
-        </p>
-
-      </div>
+    <div className="relative min-h-screen">
+      {isLoading ? (
+        <Spinner/>
+      ) : (
+        <Homepage ref={videoRef}isLoading={isLoading} setisLoading ={setIsLoading}/> // Your main homepage content
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Home;

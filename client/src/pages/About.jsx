@@ -1,64 +1,91 @@
 import React from 'react';
+import Footer from '../components/Footer.jsx';
 
-function AboutUs() {
+const About = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        <header className="bg-green-600 text-white text-center py-8">
-          <h1 className="text-4xl font-bold">About Us</h1>
-          <p className="mt-2 text-lg">Committed to a Sustainable Future</p>
-        </header>
+    <div>
+      <div className="font-sans text-gray-700 bg-gray-50 min-h-screen py-10 px-6">
+     
 
-        <section className="p-6 md:p-10 space-y-6">
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">Who We Are</h2>
-            <p className="text-gray-600 mt-2">
-              At [Your Company Name], we strive to build a sustainable ecosystem by redefining waste management practices. Founded in [Year of Establishment], our mission is to make recycling easy, efficient, and impactful for individuals and businesses.
+      {/* About Us Section */}
+      <section className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-10 mb-12">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6">About Us</h2>
+        <p className="text-lg leading-relaxed text-gray-600">The Kabadiwala.com (Start-up India Recognized) is a product of Asar Green Kabadi Pvt. Ltd., a technology-driven company working on a SaaS (Software as a Service) model to organize the waste management sector.</p>
+      </section>
+
+
+     <section className="bg-gray-50 py-10">
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl font-semibold text-gray-800 text-center mb-8">Our Core Values</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Vision */}
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-green-600 mb-4">Vision</h3>
+            <p className="text-gray-700">
+              Our vision is to bring a circular economy into a reality where used products are manufactured into new products to minimize the over-exploitation of natural resources and maximize recycling.
             </p>
           </div>
-
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">Our Mission</h2>
-            <p className="text-gray-600 mt-2">
-              Our mission is to drive a sustainable waste management system that not only reduces landfill waste but also conserves resources for future generations.
+          
+          {/* Mission */}
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-green-600 mb-4">Mission</h3>
+            <p className="text-gray-700">
+              Our mission is to make a world where nothing is wasted, the communities from around the globe building an eco-system of sustainable living through doing the right waste treatment that is to get it recycled.
             </p>
           </div>
-
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">Our Vision</h2>
-            <p className="text-gray-600 mt-2">
-              We envision a world where waste is transformed into resources, contributing to a cleaner, greener planet. By promoting a circular economy, we aim to minimize waste and maximize environmental impact.
+          
+          {/* Goal */}
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-green-600 mb-4">Goal</h3>
+            <p className="text-gray-700">
+              Through continuous innovation of technology, our goal is to make recycling achievable and accessible to all, from institutions to individuals.
             </p>
           </div>
-
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">What We Do</h2>
-            <ul className="list-disc list-inside text-gray-600 mt-2 space-y-2">
-              <li><span className="font-bold">Paper Recycling</span>: Transforming paper waste into new products.</li>
-              <li><span className="font-bold">Plastic Recycling</span>: Reducing plastic waste through sustainable recycling.</li>
-              <li><span className="font-bold">Electronic Waste Management</span>: Safely recycling electronic waste.</li>
-              <li><span className="font-bold">Metal Recycling</span>: Repurposing metal waste to reduce resource extraction.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">Why Choose Us?</h2>
-            <ul className="list-disc list-inside text-gray-600 mt-2 space-y-2">
-              <li>Convenient and reliable waste collection services.</li>
-              <li>Eco-friendly processes and sustainable practices.</li>
-              <li>Transparent and accountable waste management solutions.</li>
-              <li>Dedicated to promoting a cleaner environment.</li>
-            </ul>
-          </div>
-        </section>
-
-        <footer className="bg-gray-800 text-white text-center py-6">
-          <p>Join us in creating a sustainable future. Together, we can make a difference!</p>
-          <p className="mt-2">Contact us at <span className="text-green-400">contact@yourcompany.com</span></p>
-        </footer>
+        </div>
       </div>
+    </section>
+    
+
+
+
+      {/* Belief, Minimizing Landfills, and Maximizing Recycling */}
+      <section className="max-w-5xl mx-auto bg-gray-50 shadow-md rounded-lg p-10 mb-12">
+        <h2 className="text-3xl font-bold text-green-700 mb-6">Our Beliefs</h2>
+        <p className="text-lg leading-relaxed text-gray-600 mb-8">We believe that India can achieve a greener, cleaner environment as every household commits to recycling their dry waste.</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-700 mb-3">Minimizing Landfills</h3>
+            <p className="text-lg text-gray-600">Landfills are rapidly expanding, but effective waste management starting at the household level through waste segregation can significantly mitigate this issue.</p>
+          </div>
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-700 mb-3">Maximizing Recycling</h3>
+            <p className="text-lg text-gray-600">The Kabadiwala partners with businesses and institutions to foster a conscious ecosystem focused on recycling and sustainable practices.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Transparency, Traceability, Scalability */}
+      <section className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-10 mb-12">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6">Transparency, Traceability, and Scalability</h2>
+        <p className="text-lg leading-relaxed text-gray-600">Our suite of apps organizes the waste management process from collection to recycling, ensuring transparency and scalability across all stages.</p>
+      </section>
+
+      {/* Contact Information */}
+      <section className="max-w-5xl mx-auto bg-gray-50 shadow-md rounded-lg p-10">
+        <h2 className="text-3xl font-bold text-green-700 mb-6">Contact Us</h2>
+        <p className="text-lg text-gray-600 mb-2">The Kabadiwala, 2, Narmadapuram Rd, near D-Mart, Vidya Nagar, Bhopal, Madhya Pradesh 462026</p>
+        <p className="text-lg text-gray-600 mb-2">Email: <a href="mailto:contact@thekabadiwala.com" className="text-green-700 hover:underline">contact@thekabadiwala.com</a></p>
+        <p className="text-lg text-gray-600">Phone: <a href="tel:+917697260260" className="text-green-700 hover:underline">+91-76972 60260</a></p>
+      </section>
+
+      {/* Footer */}
+      
+   </div>
+    <Footer/>
     </div>
   );
-}
+};
 
-export default AboutUs;
+export default About;
