@@ -25,6 +25,7 @@ import Viewdealer from './pages/Viewdealer.jsx';
 import SetPrice from './components/SetPrice.jsx';
 import Viewbill from './pages/Viewbill.jsx';
 import History from './pages/History.jsx';
+import GiveFeedback from './pages/GiveFeedback.jsx';
 function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -52,6 +53,7 @@ function App() {
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
         <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
+        <Route path = "/givefeedback/:req_id" element = {<GiveFeedback />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>

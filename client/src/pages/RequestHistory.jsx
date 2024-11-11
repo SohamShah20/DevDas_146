@@ -63,6 +63,10 @@ const RequestHistory = (props) => {
                   >
                     View Bill
                   </Link>
+                  {!request.givenFeedback ? <Link to={`/givefeedback/${req_id}`} 
+                  className="text-blue-500 hover:text-blue-600 font-medium hover:underline">
+                    Give Feedback
+                    </Link> : <></>}
                 </div>
               </div>
             );
