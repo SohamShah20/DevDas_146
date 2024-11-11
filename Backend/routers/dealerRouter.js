@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {getrequests,acceptrequests,getacceptedrequests,genreceipt,getclosedrequests} from '../controllers/dealerController.js';
 import express from "express";
-import { verifyToken } from "../controllers/Verifyuser.js";
+import { verifyToken } from "../utils/Verifyuser.js";
 const router = express.Router();
 
 router.get('/getrequests/:id',getrequests);

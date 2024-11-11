@@ -52,18 +52,18 @@ const submitHandler= async(event)=>{
             Signup 
             <br />
             <label><p>username</p></label>
-            <input type = "text" name = "username"  placeholder='username' onChange = {changeHandler} />
+            <input type = "text" name = "username" required placeholder='username' onChange = {changeHandler} />
 
             <label htmlFor='email'>Email</label>
-            <input type = "email" name = "email" id = "email" placeholder='email' onChange = {changeHandler} />
+            <input type = "email" name = "email" required id = "email" placeholder='email' onChange = {changeHandler} />
             <label htmlFor='address'>Address</label>
-            <input type = "text" name = "address" id = "address" placeholder='address' onChange = {changeHandler} />
+            <input type = "text" name = "address" required id = "address" placeholder='address' onChange = {changeHandler} />
             <label htmlFor='password'>Password</label>
-            <input type = "password" name = "password" id = "password" placeholder='password' onChange = {changeHandler} />
+            <input type = "password" name = "password" required id = "password" placeholder='password' onChange = {changeHandler} />
             <br />
             <br />
             <label htmlFor='city'>city </label>
-            <input type = "text" name = "city" id = "city"  placeholder='city' onChange = {changeHandler} />
+            <input type = "text" name = "city" required id = "city"  placeholder='city' onChange = {changeHandler} />
             <br />
             <button
           disabled={loading}

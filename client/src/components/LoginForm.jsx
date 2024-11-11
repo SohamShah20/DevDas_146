@@ -76,7 +76,8 @@ const LoginForm = () => {
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
          id="email" 
          name = "email"
-          required value={formData.email} 
+          required 
+          value={formData.email} 
           onChange={changeHandler} />
         <div className="mb-6">
         <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
@@ -84,7 +85,8 @@ const LoginForm = () => {
         </label>
         <input type = "password"
          name = "password" 
-         required value = {formData.password}
+         required 
+         value = {formData.password}
            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           onChange = {changeHandler} />
         </div>
@@ -117,6 +119,7 @@ const LoginForm = () => {
         <Link to={'/signup'}>
           <span className=''>Sign up</span>
         </Link>
+        <Link to="/forgot-password">Forgot Password</Link>
       </div>
       {error && <p className='error'>{error}</p>}
     

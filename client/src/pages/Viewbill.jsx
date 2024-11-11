@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import Scrapdetail from '../components/Scrapdetail';
+import { signOutUserSuccess } from '../redux/user/userSlice';
+import { useNavigate } from 'react-router-dom';
+
 const   Viewbill = (props) => {
     const { currentUser } = useSelector((state) => state.user);
     const [details, setdetails] = useState([]);
@@ -9,6 +12,8 @@ const   Viewbill = (props) => {
     const [message, setmessage] = useState(null);
     const [bill,setbill]=useState({});
     const {req_id} =useParams();
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     useEffect(() => {
         const fetchdealer = async () => {
             try {
@@ -20,7 +25,8 @@ const   Viewbill = (props) => {
                 console.error('Error fetching requests:', error);
             }
         };
-
+       
+            
         if (currentUser) {
             fetchdealer();
         }

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import Scrapdetail from '../components/Scrapdetail';
+import { useNavigate } from 'react-router-dom';
+import { signOutUserSuccess } from '../redux/user/userSlice';
 const   Viewrequests = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [requests, setRequests] = useState([]);
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
     useEffect(() => {
         const fetchRequests = async () => {
             try {
@@ -24,7 +28,28 @@ const   Viewrequests = () => {
     }, [currentUser]);
 
    
+async function handledelete(event,index){
+    const id=requests[index]._id;
+    try{const res = await fetch(`http://localhost:3001/api/customer/deletereq/${id}`, {
+        method: 'DELETE',
+      
+        credentials: 'include',
+        
+      });
 
+      const data=res.json();
+      if(data.success!==true){
+        seterror(data.message);
+        return;
+      }
+
+      setmessage(data.message);
+    }
+      catch(error){
+        seterror(error.message);
+        return;
+      }
+}
        
     return (
         <div>
@@ -41,7 +66,8 @@ const   Viewrequests = () => {
                         
                          
                         Scrap Details:<Scrapdetail scrapDetail={request.scrapData} />
-                        
+                        <button onClick={(event)=>handledelete(event,index)}>Delete request</button>
+                        <button>Update request</button>
                         <hr/>
                         
                     </div>

@@ -104,9 +104,9 @@ function Request(props){
 
               
               <label>Type of Scrap</label>
-              <input type = "text" name="type" onChange={(event)=>change(event,index)} value={scrap.type}/>
+              <input type = "text" name="type" required onChange={(event)=>change(event,index)} value={scrap.type}/>
               <label>Quantity of Scrap</label>
-              <input type = "text" name="quantity" onChange={(event)=>change(event,index)} value={scrap.quantity}/>
+              <input type = "text" name="quantity" required onChange={(event)=>change(event,index)} value={scrap.quantity}/>
               <button type='button' onClick={(event)=>remove(event,index)}>Remove</button>
               </div>
             ))
@@ -118,9 +118,9 @@ function Request(props){
             
 
             <label><p>Date to Sell</p></label>
-            <input name= "date" type="date" onChange={handlechange}/>
+            <input name= "date" type="date" required onChange={handlechange}/>
             <label><p>Time</p></label>
-            <input type="time" name="time" onChange={handlechange} />
+            <input type="time" name="time" required onChange={handlechange} />
           
           {isLoading?<>Loading..</>:<button >Submit</button>}
             </form>

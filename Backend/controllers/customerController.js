@@ -103,3 +103,17 @@ export async function getrequests(req,res,next){
                   return res.status(404).json(error);
               }
               }
+
+
+
+              export async function deletereq(req,res,next){
+                const id=req.params.id;
+               
+                
+                try
+                { const request= await Request.findByIdAndDelete(id);
+                return res.status(200).json('deleted');}
+                catch(error){
+                    return res.status(404).json(error);
+                }
+                }
