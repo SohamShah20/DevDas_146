@@ -2,16 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {useNavigate, useParams} from 'react-router-dom';
 import Scrapdetail from '../components/Scrapdetail';
-import { useDispatch } from 'react-redux';
-import {
 
- 
-    signOutUserStart,
-    signOutUserSuccess,
-    signOutUserFailure,
-    setiscust
-  } from '../redux/user/userSlice';
-const   Viewdealer = (props) => {
+const   Viewdealer = () => {
+
     const { currentUser } = useSelector((state) => state.user);
     const [dealer, setdealer] = useState({});
     const [error, seterror] = useState(null);

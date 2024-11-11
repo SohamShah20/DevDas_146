@@ -1,133 +1,171 @@
-import React from 'react';
-import '../components/Form.css';
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  signInStart,
-  signInSuccess,
-  signInFailure,
-} from '../redux/user/userSlice';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-function Request(props){
-  const {currentUser}=useSelector((state)=>state.user);
-  const [scrapData,setscrapData] =useState([{
-    type:"",
-    quantity:""
-  },]);
+const Request = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const [scrapData, setScrapData] = useState([{ type: "", quantity: "" }]);
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [alert, setAlert] = useState(null);
+  const navigate = useNavigate();
 
-  const[formData,setformData]=useState({});
-  const[error,seterror]=useState(null);
-  const[isLoading,setisLoading]=useState(false);
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  const[message,setmessage]=useState(null);
-  const[allert,setallert]=useState(null);
- const navigate=useNavigate();
-  async function handlechange(event){
-   setformData({
-    ...formData,
-     [event.target.name]:event.target.value
-   })
-   console.log(formData);
-  }
-   async function change(event,index){
-    const data=[...scrapData];
-    data[index][event.target.name]=event.target.value;
-    setscrapData(data);
-  
-   
-  }
- const add=async(event)=>{
-  if(scrapData.length>=5){
-    setscrapData(scrapData);
-    setallert('No more than 5 items can be added');
-  }
-   else{
-      const object={
-    type:"",
-    quantity:""
+  const handleScrapChange = (event, index) => {
+    const data = [...scrapData];
+    data[index][event.target.name] = event.target.value;
+    setScrapData(data);
+  };
+
+  const addScrapItem = () => {
+    if (scrapData.length >= 5) {
+      setAlert('No more than 5 items can be added');
+    } else {
+      setScrapData([...scrapData, { type: "", quantity: "" }]);
     }
+  };
 
-    setscrapData([...scrapData,object]);}
-  }
-  const remove=async(event,index)=>{
-     const data=scrapData.filter((_,i)=>i!==index);
+  const removeScrapItem = (index) => {
+    const data = scrapData.filter((_, i) => i !== index);
+    setScrapData(data);
+  };
 
-
-    setscrapData(data);
-   } 
-  
-  const  submitHandler= async(event)=>{
+  const submitHandler = async (event) => {
     event.preventDefault();
-    setisLoading(true);
-    formData.scrapData=scrapData;
-   formData.city=currentUser.city;
-   formData.custname=currentUser.username;
-   formData.email=currentUser.email;
+    setIsLoading(true);
+    formData.scrapData = scrapData;
+    formData.city = currentUser.city;
+    formData.custname = currentUser.username;
+    formData.email = currentUser.email;
+
     try {
-     
       const res = await fetch('http://localhost:3001/api/customer/request', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
-      if (data.success === false) {
-        seterror(data.message);
-        setisLoading(false);
+      /*if (!data.success) {
+        setError(data.message);
+        console.log(data.success);
+        setIsLoading(false);
         return;
-      }
-      
-      setisLoading(false);
-      setmessage(data.message);
+      }*/
+      setMessage(data.message);
       navigate('/');
-    } catch (error) {
-        setisLoading(false);
-      seterror(error.message);
-      return;
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-   
-    
-  }
-    return(
-        <div>
+  };
 
-            <form onSubmit={submitHandler}>
-              <div>
-                <p>Scrap Details</p>
-              {scrapData.map((scrap,index)=>(
-              <div key={index}>
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-green-50 to-green-100 flex flex-col items-center py-10 px-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full text-center mb-10">
+        <h1 className="text-3xl font-bold text-green-600 mb-2">New Scrap Request</h1>
+        <p className="text-gray-600">Fill out the details below to request scrap collection.</p>
+      </div>
+
+      <form onSubmit={submitHandler} className="bg-white p-8 rounded-lg shadow-md max-w-3xl w-full">
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-green-600">Scrap Details</h2>
+          {scrapData.map((scrap, index) => (
+            <div key={index} className="flex items-center space-x-4 mt-4">
+              <input
+                type="text"
+                name="type"
+                value={scrap.type}
+                onChange={(event) => handleScrapChange(event, index)}
+                placeholder="Type of Scrap"
+                className="border rounded p-2 flex-1"
+              />
+              <input
+                type="text"
+                name="quantity"
+                value={scrap.quantity}
+                onChange={(event) => handleScrapChange(event, index)}
+                placeholder="Quantity"
+                className="border rounded p-2 flex-1"
+              />
+              <button
+                type="button"
+                onClick={() => removeScrapItem(index)}
+                className="text-red-600 font-bold"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          {alert && <p className="text-red-600 mt-2">{alert}</p>}
+          <button
+            type="button"
+            onClick={addScrapItem}
+            className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+          >
+            Add Scrap Item
+          </button>
+        </div>
+
 
               
-              <label>Type of Scrap</label>
-              <input type = "text" name="type" required onChange={(event)=>change(event,index)} value={scrap.type}/>
-              <label>Quantity of Scrap</label>
-              <input type = "text" name="quantity" required onChange={(event)=>change(event,index)} value={scrap.quantity}/>
-              <button type='button' onClick={(event)=>remove(event,index)}>Remove</button>
-              </div>
+            
             ))
 
-            }
-           {allert?<p>{allert}</p>:<></>} 
-          <button type='button' onClick={add}>Add</button>
-              </div>
-            
-
-            <label><p>Date to Sell</p></label>
-            <input name= "date" type="date" required onChange={handlechange}/>
-            <label><p>Time</p></label>
-            <input type="time" name="time" required onChange={handlechange} />
-          
-          {isLoading?<>Loading..</>:<button >Submit</button>}
-            </form>
-            {error ? <>{error}</> : <></>}
-            {message ? <>{message}</> : <></>}
+        <div className="mt-6">
+          <label className="block text-green-700">Date to Sell</label>
+          <input
+            type="date"
+            name="date"
+            required
+            onChange={handleChange}
+            className="border rounded p-2 w-full mt-2"
+          />
         </div>
-    )
-}
+
+
+        <div className="mt-6">
+          <label className="block text-green-700">Time</label>
+          <input
+            type="time"
+            name="time"
+            required
+            onChange={handleChange}
+            className="border rounded p-2 w-full mt-2"
+          />
+        </div>
+
+           
+          
+          
+     <div className="mt-8 text-center">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600"
+            >
+              Submit Request
+            </button>
+          )}
+
+        </div>
+      </form>
+
+      {error && <p className="mt-4 text-red-600">{error}</p>}
+      {message && <p className="mt-4 text-green-600">{message}</p>}
+    </div>
+  );
+};
 
 export default Request;

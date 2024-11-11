@@ -2,6 +2,7 @@ import Dealer from "../models/dealer.model.js";
 import Request from "../models/request.model.js";
 import Bill from"../models/bill.model.js";
 import Scrap from "../models/scrap.model.js";
+import Feedback from "../models/feedback.model.js";
 export async function getrequests(req,res,next){
 const id=req.params.id;
 const dealer= await Dealer.findById(id);
@@ -116,5 +117,12 @@ export async function getclosedrequests(req,res,next){
   }
   }
 
-
-
+export async function getfeedbacks(req,res,next){
+    const id = req.params.id;
+    try{
+        const feedbacks=await Feedback.find({dealer:id});
+        return res.status(200).json(feedbacks);
+    }catch(error){
+        return res.status(404).json(error);
+    }
+}

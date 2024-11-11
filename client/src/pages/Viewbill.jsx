@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import Scrapdetail from '../components/Scrapdetail';
-import { signOutUserSuccess } from '../redux/user/userSlice';
-import { useNavigate } from 'react-router-dom';
 
-const   Viewbill = (props) => {
+const   Viewbill = () => {
+
     const { currentUser } = useSelector((state) => state.user);
     const [details, setdetails] = useState([]);
     const [error, seterror] = useState(null);
