@@ -54,11 +54,12 @@ const Request = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (!data.success) {
+      /*if (!data.success) {
         setError(data.message);
+        console.log(data.success);
         setIsLoading(false);
         return;
-      }
+      }*/
       setMessage(data.message);
       navigate('/');
     } catch (err) {

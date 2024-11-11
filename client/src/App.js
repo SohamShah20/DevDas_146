@@ -26,6 +26,7 @@ import SetPrice from './components/SetPrice.jsx';
 import Viewbill from './pages/Viewbill.jsx';
 import History from './pages/History.jsx';
 import GiveFeedback from './pages/GiveFeedback.jsx';
+import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
 function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -54,6 +55,7 @@ function App() {
         <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
         <Route path = "/givefeedback/:req_id" element = {<GiveFeedback />} />
+        <Route path = "/viewdealerfeedback" element = {<DealerFeedbacks />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>

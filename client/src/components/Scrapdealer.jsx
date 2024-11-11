@@ -20,6 +20,9 @@ const Scrapdealer = () => {
        <br />
         <Link to={'/gethistory'} className=''>SEE REQUEST HISTORY
         </Link>
+        <br />
+        <Link to={'/viewdealerfeedback'} className=''>View All Feedback
+        </Link>
     </div>
   )
 }

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Scrapdetail from '../components/Scrapdetail';
+import { useNavigate } from 'react-router-dom';
 const GetRequests = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [requests, setRequests] = useState([]);
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchRequests = async () => {
             try {
@@ -36,12 +38,13 @@ const GetRequests = () => {
 
           const data=await res.json();
 
-         if(data.success!==true){
+         /*if(data.success!==true){
             seterror(data.message);
             return;
-         }
+         }*/
          setmessage(data.message);
         console.log(message);
+        navigate('/getrequests');
     }
     return (
         <div>
