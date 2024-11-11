@@ -63,6 +63,7 @@ const RequestHistory = (props) => {
                   >
                     View Bill
                   </Link>
+                  {!request.givenFeedback ? <Link to={`/givefeedback/${req_id}`}>Give Feedback</Link> : <></>}
                 </div>
               </div>
             );
