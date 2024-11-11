@@ -41,11 +41,11 @@ const   RequestHistory = (props) => {
                         <p>Customer email: {request.email}</p>
                         <p>Date of Scrap pickup: {request.date}</p>
                         <p>Time of Scrap pickup: {request.time}</p>
-                       
                          
                         Scrap Details:<Scrapdetail scrapDetail={request.scrapData} /><br />
                         <Link  to={`/viewdealer/${id}`}>View dealer details</Link><br />
                         <Link  to={`/viewbill/${req_id}`}>View Bill</Link><br />
+                        {!request.givenFeedback ? <Link to={`/givefeedback/${req_id}`}>Give Feedback</Link> : <></>}
                         <hr/>
                         
                     </div>)
