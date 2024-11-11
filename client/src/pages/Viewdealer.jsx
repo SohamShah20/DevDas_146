@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import Scrapdetail from '../components/Scrapdetail';
-const   Viewdealer = (props) => {
+const   Viewdealer = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [dealer, setdealer] = useState({});
     const [error, seterror] = useState(null);
