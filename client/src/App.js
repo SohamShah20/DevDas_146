@@ -10,8 +10,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Logout from './pages/Logout';
-
-
 import { useSelector } from 'react-redux';
 import Getrequests from './pages/Getrequests';
 import Createdealer from './components/createdealer';
@@ -25,8 +23,13 @@ import Viewdealer from './pages/Viewdealer.jsx';
 import SetPrice from './components/SetPrice.jsx';
 import Viewbill from './pages/Viewbill.jsx';
 import History from './pages/History.jsx';
+
+import ForgotPassword from './pages/ForgetPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
+
 import GiveFeedback from './pages/GiveFeedback.jsx';
 import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
+
 function App() {
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -40,7 +43,7 @@ function App() {
       <Routes>
         <Route path = "/" element = {currentUser? <Dashboard /> : <Home isLoading={isLoading} setIsLoading={setIsLoading}/>} />
         <Route path = "/about" element = {<About />} />
-        <Route path = "/login" element = {<Login/>} />
+        <Route path = "/login" element = {currentUser? <Dashboard /> : <Login/>} />
         <Route path = "/signup" element = {<Signup />} />
         <Route path = "/logout" element = {<Logout />} />
         <Route path = "/createdealer" element = {<Createdealer />} />
@@ -54,8 +57,13 @@ function App() {
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
         <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
+
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
+
         <Route path = "/givefeedback/:req_id" element = {<GiveFeedback />} />
         <Route path = "/viewdealerfeedback" element = {<DealerFeedbacks />} />
+
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>

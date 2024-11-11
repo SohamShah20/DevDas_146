@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import Scrapdetail from '../components/Scrapdetail';
+
 const   Viewdealer = () => {
+
     const { currentUser } = useSelector((state) => state.user);
     const [dealer, setdealer] = useState({});
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
     const {id} =useParams();
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     useEffect(() => {
         const fetchdealer = async () => {
             try {

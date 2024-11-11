@@ -116,27 +116,38 @@ const Request = () => {
           </button>
         </div>
 
+
+              
+            
+            ))
+
         <div className="mt-6">
           <label className="block text-green-700">Date to Sell</label>
           <input
             type="date"
             name="date"
+            required
             onChange={handleChange}
             className="border rounded p-2 w-full mt-2"
           />
         </div>
+
 
         <div className="mt-6">
           <label className="block text-green-700">Time</label>
           <input
             type="time"
             name="time"
+            required
             onChange={handleChange}
             className="border rounded p-2 w-full mt-2"
           />
         </div>
 
-        <div className="mt-8 text-center">
+           
+          
+          
+     <div className="mt-8 text-center">
           {isLoading ? (
             <p>Loading...</p>
           ) : (
@@ -147,6 +158,7 @@ const Request = () => {
               Submit Request
             </button>
           )}
+
         </div>
       </form>
 

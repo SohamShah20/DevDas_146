@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7"
   }
-
 }
