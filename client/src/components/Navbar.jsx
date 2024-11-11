@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 const Navbar = ({isLoading, setIsLoading}) => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
   return (
