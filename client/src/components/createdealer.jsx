@@ -1,81 +1,136 @@
-import React from 'react';
-import './Form.css';
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Createdealer = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const {iscust}=useSelector((state) => state.user);
-  
-  const [formData, setformData] = useState({});
+  const { iscust } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({});
+  const [image, setImage] = useState(null);
 
-  function changeHandler(event){
-    setformData((prev)=>({...prev, [event.target.name]: event.target.value,}));
-  }
+  const changeHandler = (event) => {
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
-const submitHandler= async(event)=>{
+  const imageChangeHandler = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
+
+  const submitHandler = async (event) => {
     event.preventDefault();
- 
+    setLoading(true);
+
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => data.append(key, formData[key]));
+    if (image) data.append('image', image);
+
     try {
-      setLoading(true);
-      
       const res = await fetch('http://localhost:3001/api/admin/createdealer', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          
-          
-        },
         credentials: 'include',
-        body: JSON.stringify(formData),
+        body: data,
       });
-      const data = await res.json();
-      console.log(data);
-      if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
-        return;
-      }
-      setLoading(false);
-      setError(null);
-      
- 
+      const result = await res.json();
+      if (result.success === false) {
+        setError(result.message);
+      } else {
         navigate('/');
-  
+      }
     } catch (error) {
-      setLoading(false);
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <div>
-        <form onSubmit = {submitHandler}>
-            <label>username</label>
-            <input type = "text" name = "username"  placeholder='username' onChange = {changeHandler} />
-
-            <label>Email</label>
-            <input type = "email" name = "email"  placeholder='email' onChange = {changeHandler} />
-            <label>Address</label>
-            <input type = "text" name = "address"  placeholder='address' onChange = {changeHandler} />
-            <label>Password</label>
-            <input type = "password" name = "password"  placeholder='password' onChange = {changeHandler} />
-            <label>city</label>
-            <input type = "text" name = "city"  placeholder='city' onChange = {changeHandler} />
-            <button
-          disabled={loading}
-          className='signup-button'
-        >
-          {loading ? 'Loading...' : 'create'}
-        </button>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 md:p-8">
+        <h2 className="text-2xl font-semibold text-gray-700 text-center mb-6">Create Dealer</h2>
+        <form onSubmit={submitHandler} className="space-y-4" encType="multipart/form-data">
+          <div>
+            <label className="block text-gray-600 font-medium">Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={changeHandler}
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={changeHandler}
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 font-medium">Address</label>
+            <input
+              type="text"
+              name="address"
+              placeholder="Address"
+              onChange={changeHandler}
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={changeHandler}
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 font-medium">City</label>
+            <input
+              type="text"
+              name="city"
+              placeholder="City"
+              onChange={changeHandler}
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 font-medium">Profile Image</label>
+            <input
+              type="file"
+              name="image"
+              onChange={imageChangeHandler}
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              accept="image/*"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-2 mt-4 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition duration-200 ${loading ? 'cursor-not-allowed' : ''}`}
+          >
+            {loading ? 'Loading...' : 'Create'}
+          </button>
         </form>
-       
-      {error && <p className='error'>{error}</p>}
+        {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Createdealer;
