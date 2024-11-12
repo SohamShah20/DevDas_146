@@ -29,7 +29,7 @@ const DealerFeedbacks = () => {
         {feedbacks.length == 0 ? (
             <p>You have no feedbacks</p>
         ) : (
-            feedbacks.map((feedback, index)=>(
+            feedbacks.reverse().map((feedback, index)=>(
                 <div key={index}>
                     <p>Customer: {feedback.customer}</p>
                     <p>Rating Provided: {feedback.rating}</p>

@@ -51,7 +51,7 @@ const ViewAcceptedRequests = (props) => {
         <p className="text-center text-gray-700 text-lg">No requests found.</p>
       ) : (
         <div className="grid gap-8 max-w-4xl mx-auto">
-          {requests.map((request, index) => {
+          {requests.reverse().map((request, index) => {
             const id = request.dealer_id;
             return (
               <div key={index} className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300 border-l-4 border-blue-500">
