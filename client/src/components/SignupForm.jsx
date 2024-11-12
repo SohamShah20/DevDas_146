@@ -132,6 +132,19 @@ const SignupForm = () => {
           />
         </div>
 
+        <div className="space-y-2">
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Contact No.</label>
+            <input
+              type="text"
+              name="phone"
+              id="phone"
+              required
+              placeholder="Enter your contact no."
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-green-400 focus:outline-none transition duration-150"
+              onChange={changeHandler}
+            />
+          </div>
+
 
           <div className="space-y-2">
             <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
