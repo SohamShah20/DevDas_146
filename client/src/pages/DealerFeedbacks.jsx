@@ -65,10 +65,10 @@ const DealerFeedbacks = () => {
               </p>
 
               {/* Detailed feedback (if any) */}
-              {feedback.comment && (
+              {feedback.description && (
                 <div className="p-4 bg-gray-100 rounded-lg mt-4">
                   <p className="text-gray-700">
-                    <strong>Customer Comment:</strong> {feedback.comment}
+                    <strong>Customer Comment:</strong> {feedback.description}
                   </p>
                 </div>
               )}
