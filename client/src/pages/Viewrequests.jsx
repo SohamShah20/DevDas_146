@@ -8,7 +8,7 @@ import EditRequest from '../components/EditRequest';
 const   Viewrequests = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [requests, setRequests] = useState([]);
-    const [error, seterror] = useState(null);
+    const [error, setError] = useState(null);
     const [message, setmessage] = useState(null);
 
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const   Viewrequests = () => {
                 setRequests(data);
             } catch (error) {
                 console.error('Error fetching requests:', error);
-                seterror('Failed to fetch requests.');
+                setError('Failed to fetch requests.');
             }
         };
 
@@ -43,14 +43,14 @@ async function handledelete(event,index){
 
       const data=res.json();
       if(data.success!==true){
-        seterror(data.message);
+        setError(data.message);
         return;
       }
 
       setmessage(data.message);
     }
       catch(error){
-        seterror(error.message);
+        setError(error.message);
         return;
       }
 }
