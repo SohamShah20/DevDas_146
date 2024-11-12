@@ -57,7 +57,7 @@ const History = (props) => {
         {requests.length === 0 ? (
           <p className="text-gray-600">No closed requests found.</p>
         ) : (
-          requests.map((request, index) => {
+          requests.reverse().map((request, index) => {
             const req_id = request._id;
             return (
               <div
