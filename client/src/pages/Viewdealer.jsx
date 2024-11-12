@@ -72,14 +72,18 @@ const Viewdealer = () => {
               <p><strong className="text-gray-900">Email:</strong> {dealer.email}</p>
               <p><strong className="text-gray-900">City:</strong> {dealer.city}</p>
               <p><strong className="text-gray-900">Address:</strong> {dealer.address}</p>
+              <p><strong className="text-gray-900">Rating:</strong> {dealer.average}</p>
             </div>
-            {adminButton ? (<button onClick={adminHandler}>Make Admin</button>) : <></>}
           </div>
         </div>
         <div className="mt-8 text-center">
+        {adminButton ? (<button onClick={adminHandler}
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300 m-2"
+        >
+          Make Admin</button>) : <></>}
           <button
             onClick={() => navigate("/")}  // Adjust the navigation path as needed
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+            className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300 m-2"
           >
             Back to Dashboard
           </button>

@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Request = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [scrapData, setScrapData] = useState([{ type: "", quantity: "" }]);
+  const [scraps, setScraps] = useState([]);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const fetchScraps = async () => {
+      try{
+        const res = await fetch(`http://localhost:3001/api/customer/getscraps`);
+        const data = await res.json();
+        setScraps(data);
+      }catch(error){
+        setError('Error fetching scraps: ', error);
+        console.log(error);
+      }
+    };
+
+    if(currentUser){
+      fetchScraps();
+    }
+  }, [currentUser])
 
   const handleChange = (event) => {
     setFormData({
@@ -81,15 +99,18 @@ const Request = () => {
           <h2 className="text-2xl font-semibold text-green-700 mb-2 animate-pulse">Scrap Details</h2>
           {scrapData.map((scrap, index) => (
             <div key={index} className="flex items-center space-x-4 mt-4">
-              <input
-                type="text"
+              <select
                 name="type"
                 value={scrap.type}
                 required
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Type of Scrap"
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
-              />
+              >
+                {scraps.map((item, item_index)=>(
+                    <option key={item_index} value={item.type}>{item.type}</option>
+                ))}
+              </select>
               <input
                 type="number"
                 name="quantity"
