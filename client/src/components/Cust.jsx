@@ -7,7 +7,7 @@ const Cust = () => {
   const [message, setMessage] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 p-6 md:p-10 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-bl from-green-50 via-green-100 to-white p-6 md:p-10 flex flex-col items-center">
       {/* Header */}
       <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg mb-8 md:mb-10 w-full max-w-3xl text-center border-b-4 border-green-500">
         <h1 className="text-2xl md:text-3xl font-semibold text-gray-850">Welcome, {currentUser.username}!</h1>
