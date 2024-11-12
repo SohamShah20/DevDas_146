@@ -34,7 +34,7 @@ const   Viewdealer = () => {
                         <p>Dealer email: {dealer.email}</p>
                         <p>Dealer city: {dealer.city}</p>
                         <p>Dealer Address: {dealer.address}</p>
-                         
+                        <p>Rating: {dealer.average} </p>
                         
                         
                        

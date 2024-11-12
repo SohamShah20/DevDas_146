@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express-session": "^1.18.1",
     "nodemon": "^3.1.7"
   }
-
 }
