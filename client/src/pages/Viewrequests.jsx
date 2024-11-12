@@ -7,7 +7,7 @@ import Scrapdetail from '../components/Scrapdetail';
 const   Viewrequests = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [requests, setRequests] = useState([]);
-    const [error, seterror] = useState(null);
+    const [error, setError] = useState(null);
     const [message, setmessage] = useState(null);
 
 
@@ -41,14 +41,14 @@ async function handledelete(event,index){
 
       const data=res.json();
       if(data.success!==true){
-        seterror(data.message);
+        setError(data.message);
         return;
       }
 
       setmessage(data.message);
     }
       catch(error){
-        seterror(error.message);
+        setError(error.message);
         return;
       }
 }

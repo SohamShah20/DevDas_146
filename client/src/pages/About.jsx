@@ -12,9 +12,7 @@ const About = () => {
               About Us
             </h2>
             <p className="text-lg leading-relaxed text-gray-600 text-center">
-              The Kabadiwala.com (Start-up India Recognized) is a product of
-              Asar Green Kabadi Pvt. Ltd., a technology-driven company working
-              on a SaaS model to organize the waste management sector.
+            Scrap Wallah bridges the gap between dealers and customers to promote a circular economy in the scrap industry. Our platform lets users easily place scrap requests, manage profiles, track requests, and handle secure billing and payments. We’re dedicated to providing seamless, eco-friendly solutions that benefit both the environment and the community.
             </p>
           </div>
         </section>
@@ -36,10 +34,10 @@ const About = () => {
                   </h3>
                   <p className="text-gray-700">
                     {value === "Vision"
-                      ? "Our vision is to bring a circular economy into reality, where used products are manufactured into new products to minimize the over-exploitation of natural resources and maximize recycling."
+                      ? "To lead the way in sustainable recycling by connecting dealers and customers through a seamless platform. We aim to foster a circular economy where resources are reused efficiently, benefiting both the environment and society."
                       : value === "Mission"
-                      ? "Our mission is to make a world where nothing is wasted, and communities build an eco-system of sustainable living through the right waste treatment to get it recycled."
-                      : "Our goal is to make recycling accessible to all, from institutions to individuals, through continuous innovation in technology."}
+                      ? "To empower responsible recycling by offering a simple platform for scrap requests, secure payments, and efficient dealer interactions. We’re committed to making sustainable practices easy and accessible for all."
+                      : "To make sustainable recycling accessible, efficient, and beneficial for all through innovative dealer-customer connections."}
                   </p>
                 </div>
               ))}
@@ -54,8 +52,7 @@ const About = () => {
             Our Beliefs
           </h2>
           <p className="text-lg leading-relaxed text-gray-600 mb-8">
-            We believe that India can achieve a greener, cleaner environment as
-            every household commits to recycling their dry waste.
+          We believe in the power of responsible recycling to create a sustainable future, the importance of a circular economy for resource efficiency, and the value of transparent, user-friendly interactions that empower both dealers and customers. At Scrap Wallah, we are committed to environmental stewardship, community support, and driving positive change through technology.
           </p>
           
           </div>
