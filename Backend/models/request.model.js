@@ -45,6 +45,10 @@ const RequestSchema = new mongoose.Schema(
         type: String,
         default: "PENDING"
       },
+      givenFeedback:{
+        type: Boolean,
+        default: false,
+      }
   },
   { timestamps: true }
 );

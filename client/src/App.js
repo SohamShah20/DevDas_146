@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import data from './data.js';
+import logo from "./logo.svg";
+import "./App.css";
+import data from "./data.js";
 import { useState } from "react";
+
 import { NavLink, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -10,8 +11,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Logout from './pages/Logout';
-
-
 import { useSelector } from 'react-redux';
 import Getrequests from './pages/Getrequests';
 import Createdealer from './components/createdealer';
@@ -25,12 +24,20 @@ import Viewdealer from './pages/Viewdealer.jsx';
 import SetPrice from './components/SetPrice.jsx';
 import Viewbill from './pages/Viewbill.jsx';
 import History from './pages/History.jsx';
-function App() {
 
+import ForgotPassword from './pages/ForgetPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
+
+import GiveFeedback from './pages/GiveFeedback.jsx';
+import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
+import Contact from "./pages/Contact.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+
+
+function App() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
   const [dealer, setdealer] = useState(null);
-  
   return (
     <div>
 
@@ -52,6 +59,14 @@ function App() {
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
         <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
+
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
+
+        <Route path = "/givefeedback/:req_id" element = {<GiveFeedback />} />
+        <Route path = "/viewdealerfeedback" element = {<DealerFeedbacks />} />
+                  <Route path="/contact" element={<Contact />} />
+        <Route path="/profilepage" element={<ProfilePage />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>

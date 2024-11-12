@@ -53,10 +53,26 @@ export async function getrequests(req,res,next){
         }
         }
 
+        export async function getDealerFromRequest(req, res, next){
+          const id = req.params.req_id;
+          try{
+            const request = await Request.findById(id);
+            if(!request){
+              console.log('No request!');
+              return res.status(404).json({error: 'request not found'});
+            }
+            const dealer = await Dealer.findById(request.dealer_id);
+            return res.status(200).json(dealer);
+          }catch(error){
+            return res.status(404).json(error);
+          }
+        }
+
 
         export async function feedback(req, res, next){
           const {customer, dealer, rating, description} = req.body;
           const request_id = req.params.id;
+          const request = await Request.findByIdAndUpdate(request_id, {givenFeedback: true});
           const valid_id = await Feedback.findOne({ request_id });
           if(valid_id) return res.status(404).send('feedback already provided!');
           const newFeedback = new Feedback({request_id, customer, dealer, rating, description});
@@ -82,10 +98,10 @@ export async function getrequests(req,res,next){
 
           export async function getclosedrequests(req,res,next){
             const id=req.params.id;
-            const dealer= await Customer.findById(id);
+            const customer= await Customer.findById(id);
             
             try
-            {const requests=await Request.find({city:dealer.city,status:"CLOSED",email:dealer.email});
+            {const requests=await Request.find({city:customer.city,status:"CLOSED",email:customer.email});
             return res.status(200).json(requests);}
             catch(error){
                 return res.status(404).json(error);
@@ -103,3 +119,17 @@ export async function getrequests(req,res,next){
                   return res.status(404).json(error);
               }
               }
+
+
+
+              export async function deletereq(req,res,next){
+                const id=req.params.id;
+               
+                
+                try
+                { const request= await Request.findByIdAndDelete(id);
+                return res.status(200).json('deleted');}
+                catch(error){
+                    return res.status(404).json(error);
+                }
+                }

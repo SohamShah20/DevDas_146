@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -73,6 +74,14 @@ const Navbar = () => {
                   </NavLink>
                 </>
               ) : (
+                <>
+                <NavLink
+                className="className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/ProfilePage"
+                onClick={() => setIsMenuOpen(false)}
+                >
+                Profile
+              </NavLink>
                 <Link
                   className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
                   to="/logout"
@@ -80,6 +89,8 @@ const Navbar = () => {
                 >
                   Log Out
                 </Link>
+                </>
+                
               )}
             </div>
           </div>

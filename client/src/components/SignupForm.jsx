@@ -48,6 +48,7 @@ const SignupForm = () => {
   };
 
   return (
+
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
       <form onSubmit={submitHandler} className="w-full max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Create an Account</h2>
@@ -58,6 +59,7 @@ const SignupForm = () => {
             type="text"
             name="username"
             id="username"
+            required
             placeholder="Enter your username"
             className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             onChange={changeHandler}
@@ -69,6 +71,7 @@ const SignupForm = () => {
           <input
             type="email"
             name="email"
+            required
             id="email"
             placeholder="Enter your email"
             className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -82,6 +85,7 @@ const SignupForm = () => {
             type="text"
             name="address"
             id="address"
+            required
             placeholder="Enter your address"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             onChange={changeHandler}
@@ -94,6 +98,7 @@ const SignupForm = () => {
             type="password"
             name="password"
             id="password"
+            required
             placeholder="Enter your password"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             onChange={changeHandler}
@@ -106,6 +111,7 @@ const SignupForm = () => {
             type="text"
             name="city"
             id="city"
+            required
             placeholder="Enter your city"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             onChange={changeHandler}
@@ -114,6 +120,7 @@ const SignupForm = () => {
 
         <button
           type="submit"
+
           disabled={loading}
           className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
         >
