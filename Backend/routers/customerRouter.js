@@ -1,7 +1,6 @@
 import { Router } from "express";
+import {updatereq,request,getacceptedrequests,getrequests,getdealer,payreceived, feedback,getclosedrequests,getbill,deletereq,getDealerFromRequest,getscraps} from '../controllers/customerController.js';
 
-
-import {request,getacceptedrequests,getrequests,getdealer,payreceived, feedback,getclosedrequests,getbill,deletereq,getDealerFromRequest} from '../controllers/customerController.js';
 
 
 import express from "express";
@@ -18,7 +17,7 @@ router.get('/getbill/:id',getbill);
 router.post('/feedback/:id',verifyToken, feedback);
 
 router.delete('/deletereq/:id',verifyToken, deletereq);
-
+router.get('/getscraps', getscraps);
 router.get('/getDealerFromRequest/:req_id', getDealerFromRequest);
 
 export default router;
