@@ -129,7 +129,7 @@ const Viewbill = () => {
             Print
           </button>
           <button
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/")}
             className="px-6 py-3 bg-gray-500 text-white rounded-lg shadow-md hover:bg-gray-600 transition duration-300"
           >
             Back to Dashboard

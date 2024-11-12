@@ -36,11 +36,12 @@ const ViewAcceptedRequests = (props) => {
     });
     const data = await res.json();
 
-    if (!data.success) {
-      setError(data.message);
+    if (data.success===false) {
+      setError("something went wrong");
       return;
     }
-    setMessage(data.message);
+    setMessage("Received");
+    return;
   };
 
   return (
