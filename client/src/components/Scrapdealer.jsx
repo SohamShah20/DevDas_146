@@ -1,11 +1,35 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { resetFirstLogin } from "../redux/user/userSlice";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 const Scrapdealer = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser} = useSelector((state) => state.user);
+  useEffect(() => {
+    const showToastAfterLogin = localStorage.getItem("showToastAfterLogin");
+
+    if (showToastAfterLogin && currentUser) {
+      toast.success(`Welcome back, ${currentUser.username}!`, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        className: "toast-custom",
+      });
+
+      // Remove flag after showing the toast
+      localStorage.removeItem("showToastAfterLogin");
+    }
+  }, [currentUser]);
 
   return (
+    
+    <div>
+    <ToastContainer/>
     <div className="min-h-screen bg-gradient-to-bl from-green-50 via-green-100 to-white p-6 md:p-10 flex flex-col items-center">
       {/* Header */}
       <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg mb-8 md:mb-10 w-full max-w-3xl text-center border-b-4 border-green-500">
@@ -63,7 +87,9 @@ const Scrapdealer = () => {
           </Link>
         ))}
       </div>
+
     </div>
+</div>
   );
 };
 
