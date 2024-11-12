@@ -122,6 +122,16 @@ const Navbar = () => {
               >
                 Dashboard
               </NavLink>
+
+             {currentUser ?<NavLink
+                className="border border-white border-2 rounded-2xl mx-4 px-7 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors"
+                to="/ProfilePage"
+              >
+                Profile
+              </NavLink>:<></>
+
+             } 
+
               <NavLink
                 className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
                 to="/about"
@@ -129,6 +139,7 @@ const Navbar = () => {
               >
                 About
               </NavLink>
+
             </div>
 
             {/* Authentication Links */}

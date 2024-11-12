@@ -1,15 +1,64 @@
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { updateUserSuccess } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from 'firebase/storage';
+import { app } from '../firebase';
 const ProfilePage = () => {
-  const [view, setView] = useState("profile"); // To toggle between views
+  const dispatch=useDispatch();
 
+  const navigate=useNavigate();
+  const [view, setView] = useState("profile"); // To toggle between views
+  const { currentUser,iscust} = useSelector((state) => state.user);
+  const [file,setFile]=useState(undefined);
+  const [filePerc, setFilePerc] = useState(0);
+  const [error,seterror]=useState(null);
+const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({
-    name: "User Name",
-    address: "1234 Main St, City",
-    phone: "(123) 456-7890",
-    email: "user@example.com",
-    profileImage: "", // For image upload
+    username: currentUser.username,
+    address: currentUser.address,
+    phone: currentUser.phone,
+    email: currentUser.email,
+    avatar: currentUser.avatar, 
   });
+const [passwordform,setpasswordform]=useState({});
+useEffect(() => {
+  if (file) {
+    handleFileUpload(file);
+  }
+}, [file]);
+
+const handleFileUpload = (file) => {
+  const storage = getStorage(app);
+  const fileName = new Date().getTime() + file.name;
+  const storageRef = ref(storage, fileName);
+  const uploadTask = uploadBytesResumable(storageRef, file);
+
+  uploadTask.on(
+    'state_changed', 
+    (snapshot) => {
+      const progress =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setFilePerc(Math.round(progress));
+    },
+    (error) => {
+      setFileUploadError(true);
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+        setFormData({ ...formData, avatar: downloadURL })
+      );
+    }
+  );
+};
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,17 +67,68 @@ const ProfilePage = () => {
       [name]: value,
     });
   };
-
-  const handleFormSubmit = (e) => {
+  const handlepasswordChange = (e) => {
+    const { name, value } = e.target;
+    setpasswordform({
+      ...passwordform,
+      [name]: value,
+    });
+  };
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log("Profile updated:", formData);
+    try{
+      const res = await fetch(`http://localhost:3001/api/updateuser/${currentUser._id}`, {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+        
+       },
+       credentials: 'include', 
+       body: JSON.stringify(formData),
+     });
+     const data = await res.json();
+     console.log(data);
+     if (data.success === false) {
+       seterror(data.message);
+       return;
+     }
+     dispatch(updateUserSuccess(data));
+   setView("profile");
+     navigate('/profilepage');
+   } catch (error) {
+    seterror(error.message);
+   }
   };
 
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit =async (e) => {
     e.preventDefault();
-    // Handle password change logic
-    console.log("Password changed");
+    console.log(passwordform);
+    if(passwordform.newPassword!==passwordform.confirmPassword){
+      seterror("password not match");
+      return;
+    }
+   try{
+     const res = await fetch(`http://localhost:3001/api/resetpass/${currentUser._id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+       
+      },
+      credentials: 'include', 
+      body: JSON.stringify(passwordform),
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.success === false) {
+      seterror(data.message);
+      return;
+    }
+    
+    setView("profile");
+    navigate('/profilepage');
+  } catch (error) {
+   seterror(error.message);
+  }
   };
 
   return (
@@ -37,7 +137,7 @@ const ProfilePage = () => {
         <>
           <div className="relative">
             <img
-              src="profile-image-url" // replace with actual image URL or source
+              src={currentUser.avatar }// replace with actual image URL or source
               alt="Profile"
               className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
             />
@@ -49,10 +149,10 @@ const ProfilePage = () => {
             </button>
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mt-4">
-            {formData.name}
+            {currentUser.username}
           </h2>
-          <p className="text-gray-600 mb-2">Address: {formData.address}</p>
-          <p className="text-gray-600 mb-4">Phone: {formData.phone}</p>
+          <p className="text-gray-600 mb-2">Address: {currentUser.address}</p>
+          <p className="text-gray-600 mb-4">Phone: {currentUser.phone}</p>
           <button
             onClick={() => setView("changePassword")}
             className="bg-blue-500 text-white font-bold rounded px-4 py-2 mt-4 hover:bg-blue-600"
@@ -74,8 +174,9 @@ const ProfilePage = () => {
               </label>
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="username"
+                required
+                value={formData.username}
                 onChange={handleInputChange}
                 placeholder="Enter your name"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -89,6 +190,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 name="address"
+                required
                 value={formData.address}
                 onChange={handleInputChange}
                 placeholder="Enter your address"
@@ -103,6 +205,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 name="phone"
+                required
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="Enter your phone number"
@@ -117,6 +220,7 @@ const ProfilePage = () => {
               <input
                 type="email"
                 name="email"
+                required
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email"
@@ -130,10 +234,25 @@ const ProfilePage = () => {
               </label>
               <input
                 type="file"
-                name="profileImage"
-                onChange={handleInputChange}
+                name="avatar"
+                accept='image/*'
+                required
+                onChange={(e) => setFile(e.target.files[0])}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
+                      <p className='text-sm self-center'>
+          {fileUploadError ? (
+            <span className='text-red-700'>
+              Error Image upload (image must be less than 2 mb)
+            </span>
+          ) : filePerc > 0 && filePerc < 100 ? (
+            <span className='text-green-700'>{`Uploading ${filePerc}%`}</span>
+          ) : filePerc === 100 ? (
+            <span className='text-green-700'>Image successfully uploaded!</span>
+          ) : (
+            ''
+          )}
+        </p>
             </div>
 
             <button
@@ -167,6 +286,8 @@ const ProfilePage = () => {
               <input
                 type="password"
                 name="newPassword"
+                required
+                onChange={handlepasswordChange}
                 placeholder="Enter new password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -179,6 +300,8 @@ const ProfilePage = () => {
               <input
                 type="password"
                 name="confirmPassword"
+                required
+                onChange={handlepasswordChange}
                 placeholder="Confirm new password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -198,6 +321,7 @@ const ProfilePage = () => {
             >
               Back to Profile
             </button>
+            {error?<>{error}</>:<></>}
           </div>
         </div>
       )}
