@@ -38,7 +38,7 @@ function App() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
   const [dealer, setdealer] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div>
       <Navbar isLoading={isLoading} setIsLoading={setIsLoading} />
