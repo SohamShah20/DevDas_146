@@ -76,7 +76,7 @@ const GetRequests = () => {
         {requests.length === 0 ? (
           <p className="text-gray-600">No requests found.</p>
         ) : (
-          requests.map((request, index) => (
+          requests.reverse().map((request, index) => (
             <div
               key={index}
               className="bg-white p-6 rounded-lg shadow-md transition transform hover:scale-105 duration-200 border border-gray-300 hover:border-green-600 hover:shadow-lg"
