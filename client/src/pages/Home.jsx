@@ -7,7 +7,8 @@ import Homepage from '../components/Homepage.jsx';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Spinner from '../components/Spinner';
 
-const Home = ({isLoading, setIsLoading}) => {
+const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const videoRef = useRef(null); 
   useEffect(() => {
@@ -23,7 +24,7 @@ const Home = ({isLoading, setIsLoading}) => {
     }
 
     // Fallback timeout to hide spinner after 5 seconds
-    const timeoutId = setTimeout(() => setIsLoading(false), 5000);
+    const timeoutId = setTimeout(() => setIsLoading(false), 4000);
 
     return () => {
       if (videoElement) {

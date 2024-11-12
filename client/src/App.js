@@ -38,15 +38,14 @@ function App() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
   const [dealer, setdealer] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   return (
     <div>
-      <Navbar isLoading={isLoading} setIsLoading={setIsLoading} />
-      <Routes>
 
-        <Route path = "/" element = {currentUser? <Dashboard /> : <Home isLoading={isLoading} setIsLoading={setIsLoading}/>} />
-        <Route path = "/about" element = {<About />} />
-        <Route path = "/login" element = {currentUser? <Dashboard /> : <Login/>} />
+      <Navbar />
+      <Routes>
+        <Route path = "/" element = {currentUser? <Dashboard /> : <Home />} />
+        <Route path = "/about" element = {<About/>} />
+        <Route path = "/login" element = {<Login/>} />
         <Route path = "/signup" element = {<Signup />} />
         <Route path = "/logout" element = {<Logout />} />
         <Route path = "/createdealer" element = {<Createdealer />} />
