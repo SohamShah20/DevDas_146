@@ -15,8 +15,7 @@ const Navbar = () => {
 
   return (
     <div>
-     
-        <nav className="relative z-20 bg-black bg-opacity-5">
+     {!currentUser ?(<nav className="relative z-20 bg-black bg-opacity-5">
           <div className="flex justify-between items-center py-4 px-5">
             {/* Logo and Title */}
             <div className="flex items-center">
@@ -76,8 +75,8 @@ const Navbar = () => {
               ) : (
                 <>
                 <NavLink
-                className="className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
-                to="/ProfilePage"
+                className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/profilepage"
                 onClick={() => setIsMenuOpen(false)}
                 >
                 Profile
@@ -94,7 +93,87 @@ const Navbar = () => {
               )}
             </div>
           </div>
-        </nav>
+        </nav>):(<nav className="relative z-20 bg-gray-900 bg-opacity-90">
+          <div className="flex justify-between items-center py-4 px-5">
+            {/* Logo and Title */}
+            <div className="flex items-center">
+              <Link to="/">
+                <img src={logo} alt="Skrap Wallah" className="w-10 h-10 rounded-full" />
+              </Link>
+              <Link className="flex items-center ml-3">
+                <span className="text-white  md:text-xl font-bold">S K R A P</span>
+                <span className="text-white text-xl md:text-2xl font-bold ml-3">W A L L A H</span>
+              </Link>
+            </div>
+
+            {/* Hamburger Menu Icon for Mobile */}
+            <div className="md:hidden">
+              <button onClick={toggleMenu} className="text-white text-2xl focus:outline-none">
+                {isMenuOpen ? <FaTimes /> : <FaBars />}
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className={`flex-col md:flex md:flex-row md:space-x-4 ${isMenuOpen ? 'flex' : 'hidden'} md:flex items-center`}>
+              <NavLink
+                className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Dashboard
+              </NavLink>
+              <NavLink
+                className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/about"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </NavLink>
+            </div>
+
+            {/* Authentication Links */}
+            <div className={`flex-col md:flex md:flex-row md:space-x-4 ${isMenuOpen ? 'flex' : 'hidden'} md:flex items-center`}>
+              {!currentUser ? (
+                <>
+                  <NavLink
+                    className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                    to="/login"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Log in
+                  </NavLink>
+                  <NavLink
+                    className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                    to="/signup"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign up
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                <NavLink
+                className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/profilepage"
+                onClick={() => setIsMenuOpen(false)}
+                >
+                Profile
+              </NavLink>
+                <Link
+                  className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                  to="/logout"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Log Out
+                </Link>
+                </>
+                
+              )}
+            </div>
+          </div>
+        </nav>)
+
+     }
      
     </div>
   );
