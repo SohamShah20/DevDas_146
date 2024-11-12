@@ -32,7 +32,7 @@ import GiveFeedback from './pages/GiveFeedback.jsx';
 import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
 import Contact from "./pages/Contact.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
-
+import DealerList from "./pages/DealerList.jsx";
 
 function App() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -67,6 +67,7 @@ function App() {
         <Route path = "/viewdealerfeedback" element = {<DealerFeedbacks />} />
                   <Route path="/contact" element={<Contact />} />
         <Route path="/profilepage" element={<ProfilePage />} />
+        <Route path="/dealerlist" element={<DealerList />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>
