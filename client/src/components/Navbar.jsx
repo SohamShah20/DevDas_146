@@ -33,12 +33,14 @@ const Navbar = ({ isLoading, setIsLoading }) => {
               >
                 Contact Us
               </NavLink>
-              <NavLink
+             {currentUser ?<NavLink
                 className="border border-white border-2 rounded-2xl mx-4 px-7 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors"
                 to="/ProfilePage"
               >
                 Profile
-              </NavLink>
+              </NavLink>:<></>
+
+             } 
             </div>
 
             <div>

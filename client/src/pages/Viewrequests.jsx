@@ -19,7 +19,7 @@ const   Viewrequests = () => {
                 setRequests(data);
             } catch (error) {
                 console.error('Error fetching requests:', error);
-                setError('Failed to fetch requests.');
+                seterror('Failed to fetch requests.');
             }
         };
 
