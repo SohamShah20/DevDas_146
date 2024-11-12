@@ -1,6 +1,6 @@
 import React from 'react';
 import './Form.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,9 +11,15 @@ import {
 const LoginForm = () => {
   
 
-  const { loading, error,iscust } = useSelector((state) => state.user);
+  const { loading, error,iscust, currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(currentUser){
+      navigate('/');
+    }
+  }, [currentUser]);
 
   const [formData, setFormData] = useState({
     email: "",

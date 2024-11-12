@@ -33,7 +33,7 @@ const   History = (props) => {
             {requests.length === 0 ? (
                 <p>No requests found.</p>
             ) : (
-                requests.map((request, index) => {
+                requests.reverse().map((request, index) => {
                    
                     const req_id = request._id;
                     return(<div key={index}>

@@ -52,7 +52,7 @@ const GetRequests = () => {
             {requests.length === 0 ? (
                 <p>No requests found.</p>
             ) : (
-                requests.map((request, index) => (
+                requests.reverse().map((request, index) => (
                     <div key={index}>
                         <p>Customer Name: {request.custname}</p>
                         <p>Customer email: {request.email}</p>
