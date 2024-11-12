@@ -11,8 +11,7 @@ const   Viewbill = () => {
     const [message, setmessage] = useState(null);
     const [bill,setbill]=useState({});
     const {req_id} =useParams();
-    const dispatch=useDispatch();
-    const navigate=useNavigate();
+
     useEffect(() => {
         const fetchdealer = async () => {
             try {

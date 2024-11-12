@@ -10,7 +10,7 @@ const   Viewdealer = () => {
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
     const {id} =useParams();
-    const dispatch=useDispatch();
+
     const navigate=useNavigate();
     useEffect(() => {
         const fetchdealer = async () => {

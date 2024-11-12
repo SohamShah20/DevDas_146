@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import data from './data.js';
+import logo from "./logo.svg";
+import "./App.css";
+import data from "./data.js";
 import { useState } from "react";
+
 import { NavLink, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -29,18 +30,20 @@ import ResetPassword from './pages/ResetPassword.jsx';
 
 import GiveFeedback from './pages/GiveFeedback.jsx';
 import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
+import Contact from "./pages/Contact.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+
 
 function App() {
-
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [scraps, setScraps] = useState(data);
   const [dealer, setdealer] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div>
-
-      <Navbar isLoading={isLoading} setIsLoading={setIsLoading}/>
+      <Navbar isLoading={isLoading} setIsLoading={setIsLoading} />
       <Routes>
+
         <Route path = "/" element = {currentUser? <Dashboard /> : <Home isLoading={isLoading} setIsLoading={setIsLoading}/>} />
         <Route path = "/about" element = {<About />} />
         <Route path = "/login" element = {currentUser? <Dashboard /> : <Login/>} />
@@ -63,7 +66,8 @@ function App() {
 
         <Route path = "/givefeedback/:req_id" element = {<GiveFeedback />} />
         <Route path = "/viewdealerfeedback" element = {<DealerFeedbacks />} />
-
+                  <Route path="/contact" element={<Contact />} />
+        <Route path="/profilepage" element={<ProfilePage />} />
         <Route path = "*" element = {<NotFound />} />
 
       </Routes>

@@ -70,15 +70,15 @@ const Request = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-50 to-green-100 flex flex-col items-center py-10 px-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full text-center mb-10">
-        <h1 className="text-3xl font-bold text-green-600 mb-2">New Scrap Request</h1>
-        <p className="text-gray-600">Fill out the details below to request scrap collection.</p>
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 flex flex-col items-center py-12 px-6">
+      <div className="bg-white p-10 rounded-xl shadow-xl max-w-3xl w-full text-center mb-12 transition duration-300 transform hover:scale-105">
+        <h1 className="text-4xl font-bold text-blue-600 mb-4">Request Scrap Pickup</h1>
+        <p className="text-gray-700">Provide your scrap details to schedule a pickup.</p>
       </div>
 
-      <form onSubmit={submitHandler} className="bg-white p-8 rounded-lg shadow-md max-w-3xl w-full">
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-green-600">Scrap Details</h2>
+      <form onSubmit={submitHandler} className="bg-white p-10 rounded-xl shadow-lg max-w-3xl w-full transition duration-300 transform hover:scale-105">
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold text-green-700 mb-2 animate-pulse">Scrap Details</h2>
           {scrapData.map((scrap, index) => (
             <div key={index} className="flex items-center space-x-4 mt-4">
               <input
@@ -87,7 +87,7 @@ const Request = () => {
                 value={scrap.type}
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Type of Scrap"
-                className="border rounded p-2 flex-1"
+                className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
               />
               <input
                 type="text"
@@ -95,65 +95,62 @@ const Request = () => {
                 value={scrap.quantity}
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Quantity"
-                className="border rounded p-2 flex-1"
+                className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
               />
               <button
                 type="button"
                 onClick={() => removeScrapItem(index)}
-                className="text-red-600 font-bold"
+                className="text-red-500 font-semibold hover:text-red-700 transition duration-200"
               >
                 Remove
               </button>
             </div>
           ))}
-          {alert && <p className="text-red-600 mt-2">{alert}</p>}
+          {alert && <p className="text-red-500 mt-3">{alert}</p>}
           <button
             type="button"
             onClick={addScrapItem}
-            className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+            className="mt-4 bg-gradient-to-r from-green-500 to-blue-500 text-white py-2 px-6 rounded-lg hover:from-blue-500 hover:to-green-500 transition duration-200"
           >
             Add Scrap Item
           </button>
         </div>
 
 
-              
-            
-            ))
+        <div className="mt-8">
+          <label className="block text-green-700 text-lg font-medium mb-2">Date to Sell</label>
 
-        <div className="mt-6">
-          <label className="block text-green-700">Date to Sell</label>
           <input
             type="date"
             name="date"
             required
             onChange={handleChange}
-            className="border rounded p-2 w-full mt-2"
+            className="border rounded-lg p-3 w-full mt-2 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
           />
         </div>
 
 
-        <div className="mt-6">
-          <label className="block text-green-700">Time</label>
+        <div className="mt-8">
+          <label className="block text-green-700 text-lg font-medium mb-2">Time</label>
+
           <input
             type="time"
             name="time"
             required
             onChange={handleChange}
-            className="border rounded p-2 w-full mt-2"
+            className="border rounded-lg p-3 w-full mt-2 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
           />
         </div>
 
-           
-          
-          
-     <div className="mt-8 text-center">
+
+        <div className="mt-10 text-center">
+
           {isLoading ? (
-            <p>Loading...</p>
+            <p className="text-blue-500 font-semibold">Submitting...</p>
           ) : (
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600"
+              className="bg-gradient-to-r from-blue-500 to-green-500 text-white py-2 px-10 rounded-lg hover:from-green-500 hover:to-blue-500 transition duration-300 transform hover:scale-105"
             >
               Submit Request
             </button>
@@ -162,8 +159,8 @@ const Request = () => {
         </div>
       </form>
 
-      {error && <p className="mt-4 text-red-600">{error}</p>}
-      {message && <p className="mt-4 text-green-600">{message}</p>}
+      {error && <p className="mt-6 text-red-500 font-medium">{error}</p>}
+      {message && <p className="mt-6 text-green-500 font-medium">{message}</p>}
     </div>
   );
 };
