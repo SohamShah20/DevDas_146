@@ -70,12 +70,18 @@ export async function getrequests(req,res,next){
 
 
         export async function feedback(req, res, next){
-          const {customer, dealer, rating, description} = req.body;
+          const {customer, dealer, description} = req.body;
+          const rating = Number(req.body.rating);
           const request_id = req.params.id;
-          const request = await Request.findByIdAndUpdate(request_id, {givenFeedback: true});
+          const customer_obj = await Customer.findById(customer);
+          const customer_mail = customer_obj.email;
           const valid_id = await Feedback.findOne({ request_id });
           if(valid_id) return res.status(404).send('feedback already provided!');
-          const newFeedback = new Feedback({request_id, customer, dealer, rating, description});
+          await Request.findByIdAndUpdate(request_id, {givenFeedback: true});
+          const dealer_obj = await Dealer.findById(dealer);
+          await Dealer.findByIdAndUpdate(dealer, {average: (dealer_obj.average * dealer_obj.totalFeedbacks + rating) / (dealer_obj.totalFeedbacks + 1)});
+          await Dealer.findByIdAndUpdate(dealer, {totalFeedbacks: dealer_obj.totalFeedbacks + 1});
+          const newFeedback = new Feedback({request_id, customer: customer_mail, dealer, rating, description});
           try{
             await newFeedback.save();
             res.status(201).json('feedback submitted successfully!');

@@ -1,6 +1,7 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   signOutUserStart,
   signOutUserSuccess,
@@ -11,6 +12,13 @@ import {
 const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { iscust, currentUser } = useSelector((state) => state.user);
+
+  useEffect(()=>{
+    if(!currentUser){
+      navigate('/');
+    }
+  }, [currentUser]);
 
   async function logoutHandler() {
     dispatch(signOutUserStart());
