@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { NavLink, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import EditRequest from "./components/EditRequest.jsx";
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
@@ -59,7 +60,7 @@ function App() {
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
         <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
-
+        <Route path = "/editreq/:id" element = {<EditRequest />} />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
 
