@@ -57,7 +57,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-white via-green-100 to-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 via-white to-blue-100">
       <div className="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-105 hover:border-black transition-transform duration-200 ease-in-out">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
           Create an Account

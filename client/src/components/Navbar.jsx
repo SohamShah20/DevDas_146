@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   // Set the navbar background color based on route
-  const navbarBgClass = location.pathname === "/about" || location.pathname === "/login" || location.pathname === "/signup" 
+  const navbarBgClass = location.pathname === "/about" || location.pathname === "/contact" || location.pathname === "/login" || location.pathname === "/signup" 
     ? "bg-gray-900" 
     : "bg-black bg-opacity-5";
 
@@ -56,6 +56,12 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </NavLink>
+              <NavLink
+                className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/contact"
+              >
+                Contact Us
               </NavLink>
             </div>
 
@@ -110,14 +116,13 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
 
-             {currentUser ?<NavLink
-                className="border border-white border-2 rounded-2xl mx-4 px-7 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors"
-                to="/ProfilePage"
+             <NavLink
+                className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
+                to="/contact"
               >
-                Profile
+                Contact Us
               </NavLink>:<></>
-
-             } 
+           
 
               <NavLink
                 className="border border-white rounded-2xl px-5 py-2 text-white hover:bg-lime-400 hover:text-white transition-colors mt-2 md:mt-0"
