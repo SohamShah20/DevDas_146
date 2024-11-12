@@ -1,9 +1,11 @@
 import React from 'react';
 import Footer from '../components/Footer.jsx';
+import { useState,useEffect } from "react";
 
 const About = () => {
+  //
   return (
-    <div>
+    <div >
       <div className="font-sans text-gray-700 bg-gray-50 min-h-screen py-10 px-6">
      
 

@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .active{
-    @apply text-white bg-green-500 border-green-500;
+    @apply text-white bg-green-600 border-white;
 }
