@@ -91,10 +91,12 @@ const Request = () => {
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
               />
               <input
-                type="text"
+                type="number"
                 name="quantity"
                 value={scrap.quantity}
                 required
+                max={100}
+              
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Quantity"
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"

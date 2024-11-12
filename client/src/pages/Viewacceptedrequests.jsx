@@ -72,12 +72,13 @@ const ViewAcceptedRequests = (props) => {
                   >
                     View Dealer Details
                   </Link>
-                  <button
+                  {!request.cangenreceipt&&<button
                     onClick={(event) => clickHandler(event, index)}
+                    
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transform hover:scale-105 transition duration-200"
                   >
                     Received
-                  </button>
+                  </button>}
                 </div>
               </div>
             );

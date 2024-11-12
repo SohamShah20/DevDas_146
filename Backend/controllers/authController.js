@@ -14,9 +14,11 @@ export const signup = async (req, res, next) => {
   
  
     const validUser = await Customer.findOne({ email });
-    if (validUser) return res.status(404).send('User exists!');
+    const validUser2 = await Dealer.findOne({ email });
+    if (validUser || validUser2) return res.status(404).send('User exists!');
     const validUser1 = await Customer.findOne({ username });
-    if (validUser1) return res.status(404).send('User exists!');
+    const validUser3 = await Dealer.findOne({ username });
+    if (validUser1 || validUser3) return res.status(404).send('User exists!');
     const newcust = new Customer({ username, email, password: hashedPassword,address,isadmin,city });
   try {
     await newcust.save();

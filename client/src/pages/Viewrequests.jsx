@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import Scrapdetail from '../components/Scrapdetail';
 import EditRequest from '../components/EditRequest';
@@ -55,10 +55,7 @@ async function handledelete(event,index){
       }
 }
 
-async function handleupdate(event, index){
-    const req = requests[index];
-    return <EditRequest req={req}/>
-}
+
        
 
     return (
@@ -77,32 +74,35 @@ async function handleupdate(event, index){
             ) : (
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {requests.reverse().map((request, index) => (
-                        <div
-                            key={index}
-                            className="bg-white shadow-xl rounded-lg p-6 border-l-4 border-green-500 hover:border-green-700 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
-                        >
-                            <p className="text-lg font-semibold text-gray-700">
-                                Customer Name: <span className="font-bold text-green-700">{request.custname}</span>
-                            </p>
-                            <p className="text-gray-600 mt-1">
-                                Customer Email: <span className="text-gray-800">{request.email}</span>
-                            </p>
-                            <p className="text-gray-600 mt-1">
-                                Pickup Date: <span className="text-gray-800">{request.date}</span>
-                            </p>
-                            <p className="text-gray-600 mt-1">
-                                Pickup Time: <span className="text-gray-800">{request.time}</span>
-                            </p>
-                            <div className="mt-4">
-                                <h3 className="text-md font-semibold text-gray-700 mb-2">Scrap Details:</h3>
-                                <Scrapdetail scrapDetail={request.scrapData} />
-                                  
+                    {requests.reverse().map((request, index) =>{const id=request._id;
+
+                        return(
+                            <div
+                                key={index}
+                                className="bg-white shadow-xl rounded-lg p-6 border-l-4 border-green-500 hover:border-green-700 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <p className="text-lg font-semibold text-gray-700">
+                                    Customer Name: <span className="font-bold text-green-700">{request.custname}</span>
+                                </p>
+                                <p className="text-gray-600 mt-1">
+                                    Customer Email: <span className="text-gray-800">{request.email}</span>
+                                </p>
+                                <p className="text-gray-600 mt-1">
+                                    Pickup Date: <span className="text-gray-800">{request.date}</span>
+                                </p>
+                                <p className="text-gray-600 mt-1">
+                                    Pickup Time: <span className="text-gray-800">{request.time}</span>
+                                </p>
+                                <div className="mt-4">
+                                    <h3 className="text-md font-semibold text-gray-700 mb-2">Scrap Details:</h3>
+                                    <Scrapdetail scrapDetail={request.scrapData} />
+                                      
+                                </div>
+                            <button onClick={(event)=>handledelete(event,index)}>Delete request</button><br/>
+                            <Link to={`/editreq/${id}`}>Update request</Link>
                             </div>
-                        <button onClick={(event)=>handledelete(event,index)}>Delete request</button><br/>
-                        <button onClick={(event)=>handleupdate(event,index)}>Update request</button>
-                        </div>
-                    ))}
+                        )
+                    } )}
                 </div>
 
             )}
