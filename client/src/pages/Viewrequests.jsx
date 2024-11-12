@@ -21,7 +21,7 @@ const   Viewrequests = () => {
                 setRequests(data);
             } catch (error) {
                 console.error('Error fetching requests:', error);
-                seterror('Failed to fetch requests.');
+                setError('Failed to fetch requests.');
             }
         };
 
