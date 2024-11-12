@@ -28,7 +28,11 @@ const [fileUploadError, setFileUploadError] = useState(false);
     phone: currentUser.phone,
     email: currentUser.email,
     avatar: currentUser.avatar, 
+<<<<<<< Updated upstream
 
+=======
+    city:currentUser.city
+>>>>>>> Stashed changes
   });
 const [passwordform,setpasswordform]=useState({});
 useEffect(() => {
@@ -150,6 +154,7 @@ const handleFileUpload = (file) => {
               Edit Profile
             </button>
           </div>
+<<<<<<< Updated upstream
 
           <div className="mt-6 text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-2">{formData.name}</h2>
@@ -163,6 +168,20 @@ const handleFileUpload = (file) => {
             </button>
           </div>
 
+=======
+          <h2 className="text-2xl font-bold text-gray-800 mt-4">
+            {currentUser.username}
+          </h2>
+          <p className="text-gray-600 mb-2">Address: {currentUser.address}</p>
+          <p className="text-gray-600 mb-4">City: {currentUser.city}</p>
+          <p className="text-gray-600 mb-4">Phone: {currentUser.phone}</p>
+          <button
+            onClick={() => setView("changePassword")}
+            className="bg-blue-500 text-white font-bold rounded px-4 py-2 mt-4 hover:bg-blue-600"
+          >
+            Change Password
+          </button>
+>>>>>>> Stashed changes
         </>
       )}
 
@@ -195,7 +214,20 @@ const handleFileUpload = (file) => {
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
-
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                City
+              </label>
+              <input
+                type="text"
+                name="city"
+                required
+                value={formData.city}
+                onChange={handleInputChange}
+                placeholder="Enter your address"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Phone</label>
               <input
