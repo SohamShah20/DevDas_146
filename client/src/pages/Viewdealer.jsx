@@ -6,6 +6,7 @@ const Viewdealer = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [dealer, setDealer] = useState({});
   const [error, setError] = useState(null);
+  const [adminButton, setAdminButton] = useState(false);
   const [message, setMessage] = useState(null);
   const { id } = useParams();
   
@@ -28,6 +29,24 @@ const Viewdealer = () => {
     }
   }, [currentUser, id]);
 
+    useEffect(() => {
+        if(currentUser.isadmin && !dealer.isadmin){
+            setAdminButton(true);
+        }
+        else{
+            setAdminButton(false);
+        }
+    }, [currentUser, dealer]);
+
+    const adminHandler = async(event)=>{
+        try{
+            const res=await fetch(`http://localhost:3001/api/admin/dealeradmin/${id}`);
+            const data = await res.json();
+            navigate(-1);
+        }catch(error){
+            console.log(error);
+        }
+    }
   return (
     <div className="min-h-screen bg-[#e1f5d1] flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-xl space-y-8">
@@ -54,9 +73,9 @@ const Viewdealer = () => {
               <p><strong className="text-gray-900">City:</strong> {dealer.city}</p>
               <p><strong className="text-gray-900">Address:</strong> {dealer.address}</p>
             </div>
+            {adminButton ? (<button onClick={adminHandler}>Make Admin</button>) : <></>}
           </div>
         </div>
-        
         <div className="mt-8 text-center">
           <button
             onClick={() => navigate("/")}  // Adjust the navigation path as needed

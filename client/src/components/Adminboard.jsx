@@ -53,6 +53,14 @@ const Adminboard = () => {
                 Set Price
               </Link>
             </div>
+            <div className="p-6 bg-white shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 text-center">
+              <p className="text-xl text-gray-600 font-medium mb-4">View all dealers</p>
+              <Link to="/dealerlist"
+              className="inline-block px-8 py-3 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-all duration-300"
+              >
+                View Dealers
+              </Link>
+            </div>
           </div>
         </div>
       </div>
