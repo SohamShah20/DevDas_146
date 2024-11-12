@@ -1,6 +1,8 @@
-import React from 'react';
-import logo from '../assets/spin.png';
-import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+
+import React from "react";
+import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import logo from "../assets/spin.png";
+
 
 const Footer = () => {
   return (
@@ -18,8 +20,9 @@ const Footer = () => {
               <li><a href="#" className="font-semibold hover:text-green-500">Paper Shredding</a></li>
             </ul>
           </div>
-          
+
           {/* Individuals */}
+
           <div className="w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h4 className="font-semibold text-lg md:text-xl text-green-700 mb-2 md:mb-4">Individuals</h4>
             <ul className="text-slate-850 space-y-2">
@@ -28,8 +31,10 @@ const Footer = () => {
               <li><a href="#" className="font-semibold hover:text-green-500">Zero Waste Society</a></li>
             </ul>
           </div>
-          
+
           {/* Company */}
+
+         
           <div className="w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h4 className="font-semibold text-lg md:text-xl text-green-700 mb-2 md:mb-4">Company</h4>
             <ul className="text-slate-850 space-y-2">
@@ -38,19 +43,27 @@ const Footer = () => {
               <li><a href="#" className="font-semibold hover:text-green-500">Franchise</a></li>
             </ul>
           </div>
-          
+
           {/* Help */}
+
+       
+
           <div className="w-1/2 md:w-1/4 mb-6 md:mb-0">
             <h4 className="font-semibold text-lg md:text-xl text-green-700 mb-2 md:mb-4">Help</h4>
             <ul className="text-slate-850 space-y-2">
               <li><a href="#" className="font-semibold hover:text-green-500">Contact Us</a></li>
               <li><a href="#" className="font-semibold hover:text-green-500">Privacy Policy</a></li>
               <li><a href="#" className="font-semibold hover:text-green-500">Terms & Conditions</a></li>
+
             </ul>
           </div>
         </div>
 
         {/* Contact and Logo Section */}
+
+
+          {/* Social Media Icons */}
+
         <div className="w-full md:w-1/3 flex flex-col items-center md:items-start space-y-4 md:space-y-2">
           <div className="flex items-center space-x-2">
             <img src={logo} alt="Skrap Wallah" className="w-10 h-10 md:w-12 md:h-12 rounded-full" />
@@ -58,10 +71,10 @@ const Footer = () => {
             <span className="text-xl font-semibold text-slate-900">W A L L A H</span>
           </div>
 
-          <p className="text-center md:text-left font-semibold text-slate-850">+91-76972 60260</p>
-          <p className="text-center md:text-left font-semibold text-slate-850">contact@thekabadiwala.com</p>
+          <p className="text-center md:text-left font-semibold text-slate-850">+91-93309 68077</p>
+          <p className="text-center md:text-left font-semibold text-slate-850">scrapdealer31@gmail.com</p>
           <p className="text-center md:text-left font-semibold text-slate-850">
-            The Kabadiwala, 2, Narmadapuram Rd, near D-Mart, Vidya Nagar, Bhopal, Madhya Pradesh 462026
+            76, M.M Hostel MNNIT Allahabad, Prayagraj -211004
           </p>
 
           {/* Social Media Icons */}

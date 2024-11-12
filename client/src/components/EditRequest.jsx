@@ -1,21 +1,171 @@
 import React, { useEffect, useState } from 'react'
-
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 const EditRequest = (props) => {
-    const req = props.req;
+    
+    
+    const { currentUser } = useSelector((state) => state.user);
+    const [scrapData, setScrapData] = useState([{ type: "", quantity: "" }]);
     const [formData, setFormData] = useState({});
-
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState(null);
+    const [alert, setAlert] = useState(null);
+    const navigate = useNavigate();
+    const {id}=useParams();
+    const handleChange = (event) => {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
+    };
+  
+    const handleScrapChange = (event, index) => {
+      const data = [...scrapData];
+      data[index][event.target.name] = event.target.value;
+      setScrapData(data);
+    };
+  
+    const addScrapItem = () => {
+      if (scrapData.length >= 5) {
+        setAlert('No more than 5 items can be added');
+      } else {
+        setScrapData([...scrapData, { type: "", quantity: "" }]);
+      }
+    };
+  
+    const removeScrapItem = (index) => {
+      const data = scrapData.filter((_, i) => i !== index);
+      setScrapData(data);
+    };
+  
+    const submitHandler = async (event) => {
+      event.preventDefault();
+      setIsLoading(true);
+      formData.scrapData = scrapData;
+      formData.city = currentUser.city;
+      formData.custname = currentUser.username;
+      formData.email = currentUser.email;
+  
+      try {
+        const res = await fetch(`http://localhost:3001/api/customer/updatereq/${id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        /*if (!data.success) {
+          setError(data.message);
+          console.log(data.success);
+          setIsLoading(false);
+          return;
+        }*/
+        setMessage(data.message);
+       
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
   return (
     <div>
-        <p>Hello</p>
-        {/*<form onSubmit={editHandler}>
-            <label>Date</label>
-            <input
+        <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 flex flex-col items-center py-12 px-6">
+      <div className="bg-white p-10 rounded-xl shadow-xl max-w-3xl w-full text-center mb-12 transition duration-300 transform hover:scale-105">
+        <h1 className="text-4xl font-bold text-blue-600 mb-4">Request Scrap Pickup</h1>
+        <p className="text-gray-700">Provide your scrap details to schedule a pickup.</p>
+      </div>
+
+      <form onSubmit={submitHandler} className="bg-white p-10 rounded-xl shadow-lg max-w-3xl w-full transition duration-300 transform hover:scale-105">
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold text-green-700 mb-2 animate-pulse">Scrap Details</h2>
+          {scrapData.map((scrap, index) => (
+            <div key={index} className="flex items-center space-x-4 mt-4">
+              <input
+                type="text"
+                name="type"
+                value={scrap.type}
+                required
+                onChange={(event) => handleScrapChange(event, index)}
+                placeholder="Type of Scrap"
+                className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
+              />
+              <input
+                type="number"
+                name="quantity"
+                value={scrap.quantity}
+                required
+                onChange={(event) => handleScrapChange(event, index)}
+                placeholder="Quantity"
+                className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
+              />
+              <button
+                type="button"
+                onClick={() => removeScrapItem(index)}
+                className="text-red-500 font-semibold hover:text-red-700 transition duration-200"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          {alert && <p className="text-red-500 mt-3">{alert}</p>}
+          <button
+            type="button"
+            onClick={addScrapItem}
+            className="mt-4 bg-gradient-to-r from-green-500 to-blue-500 text-white py-2 px-6 rounded-lg hover:from-blue-500 hover:to-green-500 transition duration-200"
+          >
+            Add Scrap Item
+          </button>
+        </div>
+
+
+        <div className="mt-8">
+          <label className="block text-green-700 text-lg font-medium mb-2">Date to Sell</label>
+
+          <input
             type="date"
             name="date"
             required
-            defaultValue={req.date}
-            onChange={changeHandler} />
-        </form>*/}
+            onChange={handleChange}
+            className="border rounded-lg p-3 w-full mt-2 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
+          />
+        </div>
+
+
+        <div className="mt-8">
+          <label className="block text-green-700 text-lg font-medium mb-2">Time</label>
+
+          <input
+            type="time"
+            name="time"
+            required
+            onChange={handleChange}
+            className="border rounded-lg p-3 w-full mt-2 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
+          />
+        </div>
+
+
+        <div className="mt-10 text-center">
+
+          {isLoading ? (
+            <p className="text-blue-500 font-semibold">Submitting...</p>
+          ) : (
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-blue-500 to-green-500 text-white py-2 px-10 rounded-lg hover:from-green-500 hover:to-blue-500 transition duration-300 transform hover:scale-105"
+            >
+              Edit Request
+            </button>
+          )}
+
+        </div>
+      </form>
+
+      {error && <p className="mt-6 text-red-500 font-medium">{error}</p>}
+      {message && <p className="mt-6 text-green-500 font-medium">{message}</p>}
+    </div>
     </div>
   )
 }

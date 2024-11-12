@@ -36,11 +36,12 @@ const ViewAcceptedRequests = (props) => {
     });
     const data = await res.json();
 
-    if (!data.success) {
-      setError(data.message);
+    if (data.success===false) {
+      setError("something went wrong");
       return;
     }
-    setMessage(data.message);
+    setMessage("Received");
+    return;
   };
 
   return (
@@ -72,12 +73,13 @@ const ViewAcceptedRequests = (props) => {
                   >
                     View Dealer Details
                   </Link>
-                  <button
+                  {!request.cangenreceipt&&<button
                     onClick={(event) => clickHandler(event, index)}
+                    
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transform hover:scale-105 transition duration-200"
                   >
                     Received
-                  </button>
+                  </button>}
                 </div>
               </div>
             );
