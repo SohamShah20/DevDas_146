@@ -7,56 +7,39 @@ const Cust = () => {
   const [message, setMessage] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 p-8 flex flex-col items-center">
-  {/* Header */}
-  <div className="bg-blue-700 text-white p-8 rounded-lg shadow-xl mb-10 w-full max-w-4xl text-center">
-    <h1 className="text-4xl font-bold">Welcome, {currentUser.username}!</h1>
-    <p className="mt-3 text-gray-200">Easily manage your scrap requests and track their progress.</p>
-  </div>
-
+    <div className="min-h-screen bg-gradient-to-bl from-green-50 via-green-100 to-white p-6 md:p-10 flex flex-col items-center">
+      {/* Header */}
+      <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg mb-8 md:mb-10 w-full max-w-3xl text-center border-b-4 border-green-500">
+        <h1 className="text-2xl md:text-3xl font-semibold text-gray-850">Welcome, {currentUser.username}!</h1>
+        <p className="mt-2 text-gray-600">Manage your scrap requests and track their progress seamlessly.</p>
+      </div>
 
       {/* Links Section */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 max-w-4xl w-full">
-        {/* View Request History */}
-        <Link
-          to="/history"
-          className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 text-center border-t-4 border-blue-500"
-        >
-          <h2 className="text-2xl font-semibold text-blue-600">View Request History</h2>
-          <p className="text-gray-600 mt-4">Check your past requests and keep track of their status.</p>
-        </Link>
-
-        {/* Put Up a New Request */}
-        <Link
-          to="/request"
-          className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 text-center border-t-4 border-green-500"
-        >
-          <h2 className="text-2xl font-semibold text-green-600">Put Up a New Request</h2>
-          <p className="text-gray-600 mt-4">Submit a new request for scrap collection quickly.</p>
-        </Link>
-
-        {/* View Your Requests */}
-        <Link
-          to="/viewrequests"
-          className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 text-center border-t-4 border-yellow-500"
-        >
-          <h2 className="text-2xl font-semibold text-yellow-600">View Your Requests</h2>
-          <p className="text-gray-600 mt-4">Manage all your active requests in one place.</p>
-        </Link>
-
-        {/* View Your Accepted Requests */}
-        <Link
-          to="/viewacceptedrequests"
-          className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 text-center border-t-4 border-purple-500"
-        >
-          <h2 className="text-2xl font-semibold text-purple-600">View Accepted Requests</h2>
-          <p className="text-gray-600 mt-4">Find out which of your requests have been accepted.</p>
-        </Link>
+      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 max-w-3xl w-full">
+        {/* Card Template */}
+        {[
+          { to: "/history", title: "Request History", description: "View past requests and their status", icon: "📜" },
+          { to: "/request", title: "New Request", description: "Submit a new request for scrap collection", icon: "➕" },
+          { to: "/viewrequests", title: "Active Requests", description: "Manage your ongoing requests", icon: "📂" },
+          { to: "/viewacceptedrequests", title: "Accepted Requests", description: "Track accepted requests", icon: "✅" }
+        ].map((card, index) => (
+          <Link
+            key={index}
+            to={card.to}
+            className="flex items-center bg-white p-6 md:p-6 rounded-lg shadow-md transition transform hover:scale-105 duration-200 border border-gray-900 hover:border-2 hover:border-green-600 hover:shadow-lg"
+          >
+            <div className="text-3xl md:text-4xl mr-3 md:mr-4 text-green-600">{card.icon}</div>
+            <div>
+              <h2 className="text-lg md:text-xl font-semibold text-gray-800 hover:text-black">{card.title}</h2>
+              <p className="text-gray-600 mt-1 hover:text-gray-800">{card.description}</p>
+            </div>
+          </Link>
+        ))}
       </div>
 
       {/* Message Display */}
       {message && (
-        <div className="mt-10 p-4 bg-green-100 text-green-700 rounded-lg max-w-4xl w-full text-center">
+        <div className="mt-8 md:mt-10 p-4 bg-green-50 text-green-700 rounded-lg max-w-3xl w-full text-center border border-green-200">
           {message}
         </div>
       )}

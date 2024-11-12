@@ -1,7 +1,10 @@
-import React from "react";
-import Footer from "../components/Footer.jsx";
+
+import React from 'react';
+import Footer from '../components/Footer.jsx';
+import { useState,useEffect } from "react";
 
 const About = () => {
+  //
   return (
     <div>
       <div className="font-sans text-gray-700 bg-gradient-to-b from-green-100 via-teal-50 to-blue-100 min-h-screen py-10 px-6">

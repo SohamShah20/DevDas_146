@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const DealerFeedbacks = () => {
     const { currentUser } = useSelector((state) => state.user);
@@ -28,11 +29,11 @@ const DealerFeedbacks = () => {
         {feedbacks.length == 0 ? (
             <p>You have no feedbacks</p>
         ) : (
-            feedbacks.map((feedback, index)=>(
+            feedbacks.reverse().map((feedback, index)=>(
                 <div key={index}>
                     <p>Customer: {feedback.customer}</p>
-                    {/*<p>Request Made: {feedback.request_id}</p>*/}
                     <p>Rating Provided: {feedback.rating}</p>
+                    <Link to={`/viewbill/${feedback.request_id}`}>View Bill</Link>
                 </div>
             ))
         )}
