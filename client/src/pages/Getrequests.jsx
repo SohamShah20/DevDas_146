@@ -41,7 +41,7 @@ const GetRequests = () => {
         }
       );
       const data = await res.json();
-      setMessage(data.message);
+      setMessage("ACCEPTED");
       navigate("/getrequests");
     } catch (error) {
       setError("Failed to accept request. Please try again.");

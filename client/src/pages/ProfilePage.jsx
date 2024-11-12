@@ -28,11 +28,10 @@ const [fileUploadError, setFileUploadError] = useState(false);
     phone: currentUser.phone,
     email: currentUser.email,
     avatar: currentUser.avatar, 
-<<<<<<< Updated upstream
 
-=======
+
     city:currentUser.city
->>>>>>> Stashed changes
+
   });
 const [passwordform,setpasswordform]=useState({});
 useEffect(() => {
@@ -154,21 +153,12 @@ const handleFileUpload = (file) => {
               Edit Profile
             </button>
           </div>
-<<<<<<< Updated upstream
+
 
           <div className="mt-6 text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">{formData.name}</h2>
-            <p className="text-gray-600 mb-2">{formData.address}</p>
-            <p className="text-gray-600 mb-4">{formData.phone}</p>
-            <button
-              onClick={() => setView("changePassword")}
-              className="bg-blue-500 text-white font-bold rounded px-6 py-2 mt-4 hover:bg-blue-600"
-            >
-              Change Password
-            </button>
-          </div>
+         
 
-=======
+
           <h2 className="text-2xl font-bold text-gray-800 mt-4">
             {currentUser.username}
           </h2>
@@ -180,8 +170,8 @@ const handleFileUpload = (file) => {
             className="bg-blue-500 text-white font-bold rounded px-4 py-2 mt-4 hover:bg-blue-600"
           >
             Change Password
-          </button>
->>>>>>> Stashed changes
+          </button></div>
+
         </>
       )}
 

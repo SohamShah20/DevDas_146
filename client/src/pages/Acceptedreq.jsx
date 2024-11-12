@@ -43,7 +43,8 @@ const Acceptedreq = () => {
         setError(data.message);
         return;
       }
-      setMessage(data.message);
+      setMessage("Generated");
+      return;
     } catch (error) {
       setError("Failed to generate receipt. Please try again.");
     }
@@ -97,6 +98,7 @@ const Acceptedreq = () => {
             </div>
           ))
         )}
+        {message&&<p>{message}</p>}
       </div>
     </div>
   );

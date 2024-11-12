@@ -40,7 +40,7 @@ const Viewdealer = () => {
           <div className="flex justify-center items-center hover:scale-105 transition-transform duration-300 ease-in-out">
             <div className="w-32 h-32 bg-gray-200 rounded-full overflow-hidden border-4 border-gray-300 shadow-lg hover:border-[#4CAF50]">
               <img
-                src="https://via.placeholder.com/150" // Replace with actual dealer image URL
+                src={dealer.avatar} // Replace with actual dealer image URL
                 alt="Dealer Profile"
                 className="w-full h-full object-cover"
               />
@@ -59,7 +59,7 @@ const Viewdealer = () => {
         
         <div className="mt-8 text-center">
           <button
-            onClick={() => navigate("/dashboard")}  // Adjust the navigation path as needed
+            onClick={() => navigate("/")}  // Adjust the navigation path as needed
             className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
           >
             Back to Dashboard
