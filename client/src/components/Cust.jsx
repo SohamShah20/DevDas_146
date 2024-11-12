@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { resetFirstLogin } from "../redux/user/userSlice";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cust = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, isFirstLogin } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
 
+  // Show welcome toast if it's the first login
+  useEffect(() => {
+    const showToastAfterLogin = localStorage.getItem("showToastAfterLogin");
+
+    if (showToastAfterLogin && currentUser) {
+      toast.success(`Welcome back, ${currentUser.username}!`, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        className: "toast-custom",
+      });
+
+      // Remove flag after showing the toast
+      localStorage.removeItem("showToastAfterLogin");
+    }
+  }, [currentUser]);
+
+ 
+
   return (
+   
     <div className="min-h-screen bg-gradient-to-bl from-green-50 via-green-100 to-white p-6 md:p-10 flex flex-col items-center">
       {/* Header */}
+      <ToastContainer/>
       <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg mb-8 md:mb-10 w-full max-w-3xl text-center border-b-4 border-green-500">
         <h1 className="text-2xl md:text-3xl font-semibold text-gray-850">Welcome, {currentUser.username}!</h1>
         <p className="mt-2 text-gray-600">Manage your scrap requests and track their progress seamlessly.</p>
