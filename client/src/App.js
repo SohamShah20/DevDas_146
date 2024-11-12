@@ -34,6 +34,7 @@ import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
 import Contact from "./pages/Contact.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import DealerList from "./pages/DealerList.jsx";
+import CheckRateList from "./pages/CheckRateList.jsx";
 
 function App() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -70,7 +71,7 @@ function App() {
         <Route path="/profilepage" element={<ProfilePage />} />
         <Route path="/dealerlist" element={<DealerList />} />
         <Route path = "*" element = {<NotFound />} />
-
+        <Route path = "/ratelist" element = {<CheckRateList />} />
       </Routes>
     </div>
   );

@@ -40,6 +40,9 @@ const Request = () => {
   const handleScrapChange = (event, index) => {
     const data = [...scrapData];
     data[index][event.target.name] = event.target.value;
+    if(!data[index]["type"]){
+      data[index]["type"]="Newspaper";
+    }
     setScrapData(data);
   };
 
@@ -108,7 +111,7 @@ const Request = () => {
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
               >
                 {scraps.map((item, item_index)=>(
-                    <option key={item_index} value={item.type}>{item.type}</option>
+                    <option key={item_index} name="type" value={item.type}>{item.type}</option>
                 ))}
               </select>
               <input
