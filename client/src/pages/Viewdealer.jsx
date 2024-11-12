@@ -7,6 +7,7 @@ const   Viewdealer = () => {
 
     const { currentUser } = useSelector((state) => state.user);
     const [dealer, setdealer] = useState({});
+    const [adminButton, setAdminButton] = useState(false);
     const [error, seterror] = useState(null);
     const [message, setmessage] = useState(null);
     const {id} =useParams();
@@ -28,6 +29,24 @@ const   Viewdealer = () => {
         }
     }, [currentUser]);
 
+    useEffect(() => {
+        if(currentUser.isadmin && !dealer.isadmin){
+            setAdminButton(true);
+        }
+        else{
+            setAdminButton(false);
+        }
+    }, [currentUser, dealer]);
+
+    const adminHandler = async(event)=>{
+        try{
+            const res=await fetch(`http://localhost:3001/api/admin/dealeradmin/${id}`);
+            const data = await res.json();
+            navigate(-1);
+        }catch(error){
+            console.log(error);
+        }
+    }
         
     return (
         <div>
@@ -39,7 +58,7 @@ const   Viewdealer = () => {
                         <p>Dealer city: {dealer.city}</p>
                         <p>Dealer Address: {dealer.address}</p>
                         <p>Rating: {dealer.average} </p>
-                        
+                        {adminButton ? (<button onClick={adminHandler}>Make Admin</button>) : <></>}
                         
                        
                         

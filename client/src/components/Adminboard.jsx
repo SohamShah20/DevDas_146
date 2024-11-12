@@ -18,6 +18,8 @@ if(iscust) dispatch(setiscust(false));
         <Link to="/createdealer">create</Link>
         <p>Set Scrap Prices</p>
         <Link to="/setprice">Set Price</Link>
+        <p>View all dealers</p>
+        <Link to="/dealerlist">View Dealers</Link>
     </div>
   )
 }

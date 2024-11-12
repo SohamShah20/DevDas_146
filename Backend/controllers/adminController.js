@@ -23,6 +23,26 @@ export async function createdealer(req,res,next){
   
 }
 
+export async function getdealers(req,res,next){
+  const id = req.params.id;
+  try{
+    const dealers = await Dealer.find({});
+    return res.status(201).json(dealers);
+  }catch(error){
+    return res.status(404).json(error);
+  }
+}
+
+export async function dealeradmin(req,res,next){
+  const id = req.params.id;
+  try{
+    const dealer = await Dealer.findByIdAndUpdate(id, {isadmin: true});
+    return res.status(201).json('created dealer!');
+  }catch(error){
+    return res.status(404).json(error);
+  }
+}
+
 export async function setPrice(req, res, next){
   const {type, price} = req.body;
   const typeExists = await Scrap.findOne({ type });
