@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
@@ -6,8 +6,14 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { iscust } = useSelector((state) => state.user);
+  const { iscust, currentUser } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
+
+  useEffect(()=>{
+    if(currentUser){
+      navigate('/');
+    }
+  }, [currentUser]);
 
   function changeHandler(event) {
     setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));

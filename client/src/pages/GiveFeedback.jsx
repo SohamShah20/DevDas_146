@@ -10,7 +10,7 @@ const GiveFeedback = () => {
   const [formData, setFormData] = useState({
     dealer: "",
     customer: "",
-    rating: 0,
+    rating: 1,
     description: ""
   });
 

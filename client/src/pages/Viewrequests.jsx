@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import Scrapdetail from '../components/Scrapdetail';
-
+import EditRequest from '../components/EditRequest';
 
 
 const   Viewrequests = () => {
@@ -10,6 +11,7 @@ const   Viewrequests = () => {
     const [error, setError] = useState(null);
     const [message, setmessage] = useState(null);
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRequests = async () => {
@@ -19,7 +21,7 @@ const   Viewrequests = () => {
                 setRequests(data);
             } catch (error) {
                 console.error('Error fetching requests:', error);
-                setError('Failed to fetch requests.');
+                seterror('Failed to fetch requests.');
             }
         };
 
@@ -52,6 +54,11 @@ async function handledelete(event,index){
         return;
       }
 }
+
+async function handleupdate(event, index){
+    const req = requests[index];
+    return <EditRequest req={req}/>
+}
        
 
     return (
@@ -70,7 +77,7 @@ async function handledelete(event,index){
             ) : (
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {requests.map((request, index) => (
+                    {requests.reverse().map((request, index) => (
                         <div
                             key={index}
                             className="bg-white shadow-xl rounded-lg p-6 border-l-4 border-green-500 hover:border-green-700 hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
@@ -93,7 +100,7 @@ async function handledelete(event,index){
                                   
                             </div>
                         <button onClick={(event)=>handledelete(event,index)}>Delete request</button><br/>
-                        <button>Update request</button>
+                        <button onClick={(event)=>handleupdate(event,index)}>Update request</button>
                         </div>
                     ))}
                 </div>

@@ -39,7 +39,7 @@ const RequestHistory = (props) => {
         <p className="text-center text-gray-700 text-xl">No requests found.</p>
       ) : (
         <div className="grid gap-8 max-w-4xl mx-auto">
-          {requests.map((request, index) => {
+          {requests.reverse().map((request, index) => {
             const id = request.dealer_id;
             const req_id = request._id;
             return (
@@ -87,17 +87,6 @@ const RequestHistory = (props) => {
                     >
                       Give Feedback
                     </Link>
-                  )}
-
-                  {!request.givenFeedback ? (
-                    <Link
-                      to={`/givefeedback/${req_id}`}
-                      className="text-blue-500 hover:text-blue-600 font-medium hover:underline"
-                    >
-                      Give Feedback
-                    </Link>
-                  ) : (
-                    <></>
                   )}
                 </div>
               </div>

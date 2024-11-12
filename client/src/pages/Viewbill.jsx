@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import jsPDF from "jspdf"; // Step 1: Import jsPDF
 import "jspdf-autotable";
@@ -11,7 +11,6 @@ const Viewbill = () => {
   const [message, setMessage] = useState(null);
   const [bill, setBill] = useState({});
   const { req_id } = useParams();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {

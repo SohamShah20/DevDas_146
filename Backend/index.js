@@ -4,6 +4,7 @@ import dbconnect  from './database/config.js';
  import dealerRouter from './routers/dealerRouter.js';
 import adminRouter from './routers/adminRouter.js';
 import authRouter from './routers/authRouter.js';
+import userRouter from './routers/userRouter.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import jwt from 'jsonwebtoken';
@@ -34,7 +35,7 @@ app.use('/api/auth',authRouter);
 app.use('/api/customer',customerRouter);
  app.use('/api/dealer',dealerRouter);
 app.use('/api/admin',adminRouter);
-
+app.use('/api',userRouter);
 app.post('/forgot-password',async (req, res) => {
     const {email} = req.body;
     const d= await Dealer.findOne({email});

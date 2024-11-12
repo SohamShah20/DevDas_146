@@ -85,6 +85,7 @@ const Request = () => {
                 type="text"
                 name="type"
                 value={scrap.type}
+                required
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Type of Scrap"
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
@@ -93,6 +94,7 @@ const Request = () => {
                 type="text"
                 name="quantity"
                 value={scrap.quantity}
+                required
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Quantity"
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
