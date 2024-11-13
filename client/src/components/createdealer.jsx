@@ -50,7 +50,14 @@ const Createdealer = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-50 via-green-100 to-white p-6 md:p-10">
+          <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
+
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 md:p-8">
         <h2 className="text-2xl font-semibold text-gray-700 text-center mb-6">Create Dealer</h2>
         <form onSubmit={submitHandler} className="space-y-4" encType="multipart/form-data">
@@ -61,7 +68,7 @@ const Createdealer = () => {
               name="username"
               placeholder="Username"
               onChange={changeHandler}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-500"
               required
             />
           </div>
@@ -72,7 +79,7 @@ const Createdealer = () => {
               name="email"
               placeholder="Email"
               onChange={changeHandler}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-500"
               required
             />
           </div>
@@ -83,7 +90,7 @@ const Createdealer = () => {
               name="address"
               placeholder="Address"
               onChange={changeHandler}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-500"
               required
             />
           </div>
@@ -94,7 +101,7 @@ const Createdealer = () => {
               name="password"
               placeholder="Password"
               onChange={changeHandler}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-500"
               required
             />
           </div>
@@ -105,7 +112,7 @@ const Createdealer = () => {
               name="city"
               placeholder="City"
               onChange={changeHandler}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-500"
               required
             />
           </div>
@@ -115,14 +122,14 @@ const Createdealer = () => {
               type="file"
               name="image"
               onChange={imageChangeHandler}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-500"
               accept="image/*"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 mt-4 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition duration-200 ${loading ? 'cursor-not-allowed' : ''}`}
+            className={`w-full py-2 mt-4 font-medium text-white bg-green-600 rounded-md hover:bg-green-700 transition duration-200 ${loading ? 'cursor-not-allowed' : ''}`}
           >
             {loading ? 'Loading...' : 'Create'}
           </button>
