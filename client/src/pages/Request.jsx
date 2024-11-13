@@ -71,6 +71,12 @@ const Request = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 flex flex-col items-center py-12 px-6">
+      <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
       <div className="bg-white p-10 rounded-xl shadow-xl max-w-3xl w-full text-center mb-12 transition duration-300 transform hover:scale-105">
         <h1 className="text-4xl font-bold text-black-600 mb-4">Request Scrap Pickup</h1>
         <p className="text-gray-1000">Provide your scrap details to schedule a pickup.</p>

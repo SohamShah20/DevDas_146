@@ -138,6 +138,12 @@ const handleFileUpload = (file) => {
 
   return (
     <div className="flex flex-col  items-center w-full max-w-2xl mx-auto p-8 bg-blue-50 rounded-lg shadow-lg mt-12">
+      <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
       {view === "profile" && (
         <>
           <div className="relative w-40 h-40">
