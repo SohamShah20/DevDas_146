@@ -57,7 +57,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-white via-green-100 to-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 via-white to-blue-100">
       <div className="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-105 hover:border-black transition-transform duration-200 ease-in-out">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-4">
           Create an Account
@@ -131,6 +131,19 @@ const SignupForm = () => {
             onChange={changeHandler}
           />
         </div>
+
+        <div className="space-y-2">
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Contact No.</label>
+            <input
+              type="text"
+              name="phone"
+              id="phone"
+              required
+              placeholder="Enter your contact no."
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-green-400 focus:outline-none transition duration-150"
+              onChange={changeHandler}
+            />
+          </div>
 
 
           <div className="space-y-2">
