@@ -7,6 +7,7 @@ const EditRequest = (props) => {
     
     const { currentUser } = useSelector((state) => state.user);
     const [scrapData, setScrapData] = useState([{ type: "", quantity: "" }]);
+    const [scraps, setScraps] = useState([]);
     const [formData, setFormData] = useState({});
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +15,24 @@ const EditRequest = (props) => {
     const [alert, setAlert] = useState(null);
     const navigate = useNavigate();
     const {id}=useParams();
+
+    useEffect(()=>{
+      const fetchScraps = async () => {
+        try{
+          const res = await fetch(`http://localhost:3001/api/customer/getscraps`);
+          const data = await res.json();
+          setScraps(data);
+        }catch(error){
+          setError('Error fetching scraps: ', error);
+          console.log(error);
+        }
+      };
+  
+      if(currentUser){
+        fetchScraps();
+      }
+    }, [currentUser])
+
     const handleChange = (event) => {
       setFormData({
         ...formData,
@@ -24,6 +43,9 @@ const EditRequest = (props) => {
     const handleScrapChange = (event, index) => {
       const data = [...scrapData];
       data[index][event.target.name] = event.target.value;
+      if(!data[index]["type"]){
+        data[index]["type"]="Newspaper";
+      }
       setScrapData(data);
     };
   
@@ -83,15 +105,18 @@ const EditRequest = (props) => {
           <h2 className="text-2xl font-semibold text-green-700 mb-2 animate-pulse">Scrap Details</h2>
           {scrapData.map((scrap, index) => (
             <div key={index} className="flex items-center space-x-4 mt-4">
-              <input
-                type="text"
+              <select
                 name="type"
                 value={scrap.type}
                 required
                 onChange={(event) => handleScrapChange(event, index)}
                 placeholder="Type of Scrap"
                 className="border rounded-lg p-3 flex-1 focus:ring-2 focus:ring-blue-300 shadow-sm hover:shadow-md transition duration-200"
-              />
+              >
+                {scraps.map((item, item_index)=>(
+                    <option key={item_index} name="type" value={item.type}>{item.type}</option>
+                ))}
+              </select>
               <input
                 type="number"
                 name="quantity"
