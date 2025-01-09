@@ -9,6 +9,7 @@ const Acceptedreq = () => {
   const [loading, setLoading] = useState(true); // Loading state for spinner
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+<<<<<<< Updated upstream
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +27,22 @@ const Acceptedreq = () => {
       }
       setLoading(false); // Stop spinner
     };
+=======
+  
+  const fetchRequests = async () => {
+    try {
+      const res = await fetch(`http://localhost:3001/api/dealer/getacceptedrequests/${currentUser._id}`);
+      const data = await res.json();
+      setRequests(data);
+    } catch (error) {
+      console.error('Error fetching requests:', error);
+      setError("Unable to load accepted requests. Please try again later.");
+    }
+  };
+>>>>>>> Stashed changes
 
+  useEffect(() => {
+ 
     if (currentUser) {
       fetchRequests();
     }
@@ -50,6 +66,7 @@ const Acceptedreq = () => {
         setError(data.message);
         return;
       }
+     await fetchRequests();
       setMessage("Generated");
       return;
     } catch (error) {
