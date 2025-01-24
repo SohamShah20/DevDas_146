@@ -3,6 +3,7 @@ import Request from '../models/request.model.js'
 import Customer from '../models/customer.model.js'
 import Dealer from '../models/dealer.model.js';
 import Bill from '../models/bill.model.js';
+import Scrap from '../models/scrap.model.js';
 export async function request(req,res,next){
     const {city,custname,date,time,email,scrapData}=req.body;
    const times=time.toString();
@@ -16,12 +17,25 @@ export async function request(req,res,next){
       }
 }
 
+export async function updatereq(req,res,next){
+  const {city,custname,date,time,email,scrapData}=req.body;
+ const times=time.toString();
+  const dates=date.toString();
+  const id=req.params.id;
+ 
+  try {
+    const newcust = await Request.findByIdAndUpdate(id,{city,custname,date:dates,time:times,email,scrapData},{new:true});
+      res.status(201).json('request updated successfully!');
+    } catch (error) {
+      next(error);
+    }
+}
 export async function getrequests(req,res,next){
   const id=req.params.id;
   const dealer= await Customer.findById(id);
   
   try
-  {const requests=await Request.find({city:dealer.city,status:"PENDING",email:dealer.email});
+  {const requests=await Request.find({status:"PENDING",email:dealer.email});
   return res.status(200).json(requests);}
   catch(error){
       return res.status(404).json(error);
@@ -33,7 +47,7 @@ export async function getrequests(req,res,next){
       const dealer= await Customer.findById(id);
       
       try
-      {const requests=await Request.find({city:dealer.city,status:"ACCEPTED",email:dealer.email});
+      {const requests=await Request.find({status:"ACCEPTED",email:dealer.email});
       return res.status(200).json(requests);}
       catch(error){
           return res.status(404).json(error);
@@ -107,7 +121,7 @@ export async function getrequests(req,res,next){
             const customer= await Customer.findById(id);
             
             try
-            {const requests=await Request.find({city:customer.city,status:"CLOSED",email:customer.email});
+            {const requests=await Request.find({status:"CLOSED",email:customer.email});
             return res.status(200).json(requests);}
             catch(error){
                 return res.status(404).json(error);
@@ -139,3 +153,12 @@ export async function getrequests(req,res,next){
                     return res.status(404).json(error);
                 }
                 }
+
+          export async function getscraps(req,res,next){
+            try{
+              const scraps=await Scrap.find({});
+              return res.status(201).json(scraps);
+            }catch(error){
+              return res.status(404).json(error);
+            }
+          }

@@ -4,15 +4,18 @@ import bcryptjs from 'bcryptjs';
 
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import Customer from '../models/customer.model.js';
 dotenv.config();
 export async function createdealer(req,res,next){
     
     const {username, email, password,address,city} =req.body;
     const hashedPassword = bcryptjs.hashSync(password, 10);
     const validUser = await Dealer.findOne({ email });
-    if (validUser) return res.status(404).send('Dealer exists!');
+    const validUser2 = await Customer.findOne({ email });
+    if (validUser || validUser2) return res.status(404).send('Dealer exists!');
     const validUser1 = await Dealer.findOne({ username });
-    if (validUser1) return res.status(404).send('Dealer exists!');
+    const validUser3 = await Customer.findOne({ username });
+    if (validUser1 || validUser3) return res.status(404).send('Dealer exists!');
     const newcust = new Dealer({ username, email, password: hashedPassword,address,city });
   try {
     await newcust.save();
@@ -21,6 +24,26 @@ export async function createdealer(req,res,next){
     next(error);
   }
   
+}
+
+export async function getdealers(req,res,next){
+  const id = req.params.id;
+  try{
+    const dealers = await Dealer.find({});
+    return res.status(201).json(dealers);
+  }catch(error){
+    return res.status(404).json(error);
+  }
+}
+
+export async function dealeradmin(req,res,next){
+  const id = req.params.id;
+  try{
+    const dealer = await Dealer.findByIdAndUpdate(id, {isadmin: true});
+    return res.status(201).json('created dealer!');
+  }catch(error){
+    return res.status(404).json(error);
+  }
 }
 
 export async function setPrice(req, res, next){

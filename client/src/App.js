@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { NavLink, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import EditRequest from "./components/EditRequest.jsx";
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
@@ -32,7 +33,8 @@ import GiveFeedback from './pages/GiveFeedback.jsx';
 import DealerFeedbacks from './pages/DealerFeedbacks.jsx';
 import Contact from "./pages/Contact.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
-
+import DealerList from "./pages/DealerList.jsx";
+import CheckRateList from "./pages/CheckRateList.jsx";
 
 function App() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -59,7 +61,7 @@ function App() {
         <Route path = "/viewdealer/:id" element = {<Viewdealer />} />
         <Route path = "/viewbill/:req_id" element = {<Viewbill />} />
         <Route path = "/setprice" element = {<SetPrice />} />
-
+        <Route path = "/editreq/:id" element = {<EditRequest />} />
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
 
@@ -67,8 +69,9 @@ function App() {
         <Route path = "/viewdealerfeedback" element = {<DealerFeedbacks />} />
                   <Route path="/contact" element={<Contact />} />
         <Route path="/profilepage" element={<ProfilePage />} />
+        <Route path="/dealerlist" element={<DealerList />} />
         <Route path = "*" element = {<NotFound />} />
-
+        <Route path = "/ratelist" element = {<CheckRateList />} />
       </Routes>
     </div>
   );

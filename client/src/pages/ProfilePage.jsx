@@ -29,6 +29,9 @@ const [fileUploadError, setFileUploadError] = useState(false);
     email: currentUser.email,
     avatar: currentUser.avatar, 
 
+
+    city:currentUser.city
+
   });
 const [passwordform,setpasswordform]=useState({});
 useEffect(() => {
@@ -135,6 +138,12 @@ const handleFileUpload = (file) => {
 
   return (
     <div className="flex flex-col  items-center w-full max-w-2xl mx-auto p-8 bg-blue-50 rounded-lg shadow-lg mt-12">
+      <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
       {view === "profile" && (
         <>
           <div className="relative w-40 h-40">
@@ -151,17 +160,23 @@ const handleFileUpload = (file) => {
             </button>
           </div>
 
+
           <div className="mt-6 text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">{formData.name}</h2>
-            <p className="text-gray-600 mb-2">{formData.address}</p>
-            <p className="text-gray-600 mb-4">{formData.phone}</p>
-            <button
-              onClick={() => setView("changePassword")}
-              className="bg-blue-500 text-white font-bold rounded px-6 py-2 mt-4 hover:bg-blue-600"
-            >
-              Change Password
-            </button>
-          </div>
+         
+
+
+          <h2 className="text-2xl font-bold text-gray-800 mt-4">
+            {currentUser.username}
+          </h2>
+          <p className="text-gray-600 mb-2">Address: {currentUser.address}</p>
+          <p className="text-gray-600 mb-4">City: {currentUser.city}</p>
+          <p className="text-gray-600 mb-4">Phone: {currentUser.phone}</p>
+          <button
+            onClick={() => setView("changePassword")}
+            className="bg-blue-500 text-white font-bold rounded px-4 py-2 mt-4 hover:bg-blue-600"
+          >
+            Change Password
+          </button></div>
 
         </>
       )}
@@ -195,7 +210,20 @@ const handleFileUpload = (file) => {
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
-
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                City
+              </label>
+              <input
+                type="text"
+                name="city"
+                required
+                value={formData.city}
+                onChange={handleInputChange}
+                placeholder="Enter your address"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Phone</label>
               <input

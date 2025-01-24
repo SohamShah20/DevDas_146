@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Scrapdetail from "../components/Scrapdetail";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const RequestHistory = (props) => {
   const { currentUser } = useSelector((state) => state.user);
   const [requests, setRequests] = useState([]);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // New loading state
   const setDealer = props.setdealer;
 
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchRequests = async () => {
       try {
@@ -21,6 +23,8 @@ const RequestHistory = (props) => {
       } catch (error) {
         console.error("Error fetching requests:", error);
         setError("Failed to load requests.");
+      } finally {
+        setIsLoading(false); // Set loading to false after data fetch
       }
     };
 
@@ -34,8 +38,19 @@ const RequestHistory = (props) => {
       <h1 className="text-4xl font-extrabold text-blue-700 text-center mb-10 tracking-wide shadow-lg p-4 rounded-lg">
         Request History
       </h1>
+      <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
 
-      {requests.length === 0 ? (
+      {/* Spinner Display */}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : requests.length === 0 ? (
         <p className="text-center text-gray-700 text-xl">No requests found.</p>
       ) : (
         <div className="grid gap-8 max-w-4xl mx-auto">
