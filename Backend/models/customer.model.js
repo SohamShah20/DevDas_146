@@ -18,8 +18,8 @@ const CustomerSchema = new mongoose.Schema(
       
     },
     phone: {
-      type: String,
-     
+      type: Number,
+      required:true,
     },
     address: {
       type: String,
