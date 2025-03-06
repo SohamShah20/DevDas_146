@@ -26,7 +26,7 @@ const Viewrequests = () => {
     };
 
     useEffect(() => {
-<<<<<<< Updated upstream
+
         const fetchRequests = async () => {
             try {
                 setIsLoading(true);
@@ -41,9 +41,6 @@ const Viewrequests = () => {
             }
         };
 
-=======
-        
->>>>>>> Stashed changes
         if (currentUser) {
             fetchRequests();
         } else {
@@ -73,8 +70,8 @@ const Viewrequests = () => {
                 window.location.reload();
                 return;
             }
+            setRequests((prevRequests) => prevRequests.filter((_, i) => i !== index));
 
-<<<<<<< Updated upstream
             setMessage(data.message);
           
             
@@ -90,15 +87,7 @@ const Viewrequests = () => {
         } finally {
             setIsDeleting(false);
         }
-=======
-      const data=res.json();
-      if(data.success!==true){
-        setError(data.message);
-        return;
-      }
-      setRequests((prevRequests) => prevRequests.filter((_, i) => i !== index));
-      setmessage(data.message);
->>>>>>> Stashed changes
+
     }
 
     return (
