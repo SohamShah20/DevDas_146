@@ -28,7 +28,7 @@ const Request = () => {
     if(currentUser){
       fetchScraps();
     }
-  }, [currentUser])
+  }, [])
 
   const handleChange = (event) => {
     setFormData({
