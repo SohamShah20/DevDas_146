@@ -116,6 +116,18 @@ export async function getrequests(req,res,next){
           }
           }
 
+          export async function republish(req,res,next){
+            const id=req.params.id;
+           
+            
+            try
+            { const request= await Request.findByIdAndUpdate(id,{status:"PENDING"});
+            return res.status(200).json(request);}
+            catch(error){
+                return res.status(404).json(error);
+            }
+            }
+
           export async function getclosedrequests(req,res,next){
             const id=req.params.id;
             const customer= await Customer.findById(id);

@@ -61,6 +61,33 @@ const ViewAcceptedRequests = (props) => {
     }
   };
 
+  const clickHandle = async (event, index) => {
+    const req = requests[index];
+    try {
+      const res = await fetch(`http://localhost:3001/api/customer/republish/${req._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        setError("Something went wrong");
+        return;
+      }
+
+      // Filter out the received request
+      const updatedRequests = requests.filter((_, i) => i !== index);
+      setRequests(updatedRequests);
+
+      // Show success toast
+      toast.success("Republished");
+    } catch (error) {
+      setError("Failed to update request.");
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 p-8">
       <h1 className="text-3xl font-bold text-blue-600 text-center mb-10">Accepted Requests</h1>
@@ -109,6 +136,12 @@ const ViewAcceptedRequests = (props) => {
                         Received
                       </button>
                     )}
+                    <button
+                        onClick={(event) => clickHandle(event, index)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transform hover:scale-105 transition duration-200"
+                      >
+                        Republish
+                      </button>
                   </div>
                 </div>
               );
