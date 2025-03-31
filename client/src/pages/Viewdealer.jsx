@@ -49,6 +49,12 @@ const Viewdealer = () => {
     }
   return (
     <div className="min-h-screen bg-[#e1f5d1] flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+         <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-xl space-y-8">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-6">Dealer Details</h1>
         

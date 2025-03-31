@@ -12,6 +12,7 @@ import Customer from './models/customer.model.js';
 import Dealer from './models/dealer.model.js';
 import nodemailer from 'nodemailer';
 import bcryptjs from 'bcryptjs';
+import Contact from './models/contact.model.js';
 dbconnect();
 
 
@@ -39,7 +40,7 @@ app.use('/api',userRouter);
 app.post('/forgot-password',async (req, res) => {
     const {email} = req.body;
     const d= await Dealer.findOne({email});
-    
+  
    
     if(d){
         Dealer.findOne({email: email})
@@ -51,13 +52,13 @@ app.post('/forgot-password',async (req, res) => {
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                  user: 'scrapdealer31@gmail.com',
+                  user: process.env.USER,
                   pass: process.env.PASS
                 }
               });
               
               var mailOptions = {
-                from: 'scrapdealer31@gmail.com',
+                from: process.env.USER,
                 to: email,
                 subject: 'Reset Password Link',
                 text: `http://localhost:3000/reset_password/${user._id}/${token}`
@@ -144,7 +145,17 @@ else{
 }
 })
 
+app.post('/api/contact',async(req,res)=>{
+const {message,name,email,phone}=req.body;
+  const contact =new Contact({message,name,email,phone});
 
+  try{
+    await contact.save();
+    return res.status(200).json('sent');
+  }catch(err){
+   return res.status(500).json('error');
+  }
+})
 app.listen(process.env.PORT,()=>{
    
     console.log("server is running");

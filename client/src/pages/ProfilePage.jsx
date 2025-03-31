@@ -138,6 +138,12 @@ const handleFileUpload = (file) => {
 
   return (
     <div className="flex flex-col  items-center w-full max-w-2xl mx-auto p-8 bg-blue-50 rounded-lg shadow-lg mt-12">
+      <button
+        onClick={() => navigate(-1)} // Go back to the previous page
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 absolute top-20 left-4 z-10"
+      >
+        Back
+      </button>
       {view === "profile" && (
         <>
           <div className="relative w-40 h-40">
@@ -185,6 +191,8 @@ const handleFileUpload = (file) => {
                 type="text"
                 name="username"
                 required
+                maxLength={15}
+                minLength={4}
                 value={formData.username}
                 onChange={handleInputChange}
                 placeholder="Enter your name"
@@ -221,8 +229,10 @@ const handleFileUpload = (file) => {
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Phone</label>
               <input
-                type="text"
+                type="number"
                 name="phone"
+                max={9999999999}
+                min={1000000000}
                 required
                 value={formData.phone}
                 onChange={handleInputChange}
@@ -297,6 +307,8 @@ const handleFileUpload = (file) => {
                 type="password"
                 name="newPassword"
                 required
+                maxLength={15}
+                minLength={4}
                 onChange={handlepasswordChange}
                 placeholder="Enter new password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -309,6 +321,8 @@ const handleFileUpload = (file) => {
                 type="password"
                 name="confirmPassword"
                 required
+                maxLength={15}
+                minLength={4}
                 onChange={handlepasswordChange}
                 placeholder="Confirm new password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
