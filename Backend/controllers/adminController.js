@@ -14,7 +14,7 @@ export async function createdealer(req,res,next){
     const validUser2 = await Customer.findOne({ email });
     if (validUser || validUser2) return res.status(404).send('Dealer exists!');
     const validUser1 = await Dealer.findOne({ username });
-    const validUser3 = await Customer.findOne({ username });
+    const validUser3 = await Customer.findOne({ username }); 
     if (validUser1 || validUser3) return res.status(404).send('Dealer exists!');
     const newcust = new Dealer({ username, email, password: hashedPassword,address,city ,phone});
   try {

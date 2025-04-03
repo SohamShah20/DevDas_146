@@ -137,7 +137,7 @@ const SignupForm = () => {
         <div className="space-y-2">
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Contact No.</label>
             <input
-              type="number"
+              type="text"
               name="phone"
               id="phone"
               maxLength={10}
